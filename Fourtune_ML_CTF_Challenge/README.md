@@ -2,6 +2,8 @@
 
 In this web application challenge, the :detective: security researcher needs to bypass AI Corp's Identity Verification neural network. The whole CTF is implemented in docker container for ease of deployment.
 
+![Alt text](Images/Banner.PNG?raw=true "Banner")
+
 #### Setup :hammer_and_wrench:
 Install docker in your machine https://docs.docker.com/engine/install/
 
@@ -19,7 +21,9 @@ Spin up the web app using `docker exec -it -u root <container ID> python /home/F
 
 Web application can be accessed in host systems browser at http://127.0.0.1:8080/
 
-#### Rules :triangular_ruler: & Clues :monocle_face:
-**For solving CTF, it's not necessary to login into the docker container. Model.h5 file in this repo can be used for initial foothold.**
+<kbd>![Alt text](Images/Web_app.PNG?raw=true "Web_app")</kbd>
 
-For solution to CTF challenge visit :
+#### Rules :triangular_ruler: & Clues :monocle_face:
+**For solving CTF, it's not necessary to login into the docker container. [Model.h5](model.h5) file in this repo can be used for initial foothold.**
+
+For solution to CTF challenge visit : [Fourtune_CTF_Solution](Solution/)
