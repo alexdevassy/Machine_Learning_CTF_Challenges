@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>AI Corp</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font: 400 15px/1.8 "Open Sans", sans-serif;
+      color: Indigo;
+    }
+
+    .navbar {
+      font-family: "Open Sans", sans-serif;
+      margin-bottom: 0;
+      background-color: #2d2d30;
+      border: 0;
+      font-size: 11px !important;
+      letter-spacing: 4px;
+    }
+
+    .center {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 250px;
+
+      border-radius: 3px;
+      box-shadow: 8px 10px 15px 0 rgba(0, 0, 0, 0.2);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      flex-direction: column;
+    }
+
+    #drop-area {
+      border: 2px dashed #ccc;
+      border-radius: 20px;
+      width: 480px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    #drop-area.highlight {
+      border-color: Indigo;
+    }
+
+    p {
+      margin-top: 0;
+    }
+
+    .AICorp-form {
+      margin-bottom: 10px;
+      margin-top: 10px;
+      background: linear-gradient(to top right, darkmagenta 0%, rgba(150, 0, 150, 0.6) 100%);
+      border-radius: 4px;
+      box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.541);
+      color: white;
+    }
+
+    #gallery {
+      margin-top: 10px;
+    }
+
+    #gallery img {
+      width: 250px;
+      margin-bottom: 10px;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+
+    .button {
+      display: inline-block;
+      cursor: pointer;
+      width: 140px;
+      height: 34px;
+      background: darkmagenta;
+      color: #fff;
+      border-radius: 3px;
+      border: 1px;
+      box-shadow: 0 3px 0 0 rgb(138, 45, 91);
+      transition: all 0.3s ease-in-out;
+      font-size: 14px;
+    }
+
+    .button:hover {
+      background: rebeccaIndigo;
+      box-shadow: 0 3px 0 0 deeppink;
+    }
+
+    #fileselect {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+<!--
+env variables
+Python 3.8.8
+tensorflow 2.4.1
+Activation Function ='relu'
+Backend uses Model.h5 file for prediction
+    -->
+  <div">
+  </div>
+
+  <div>
+    <nav class="navbar">
+      <div style="padding: 5px 30px">
+        <h1 style="color: white;">AI Corp</h1>
+      </div>
+    </nav>
+  </div>
+
+  <div id="drop-area" class="center">
+    <div style="text-align: center;font-size: medium">
+      AI Corp's Identity Verification
+    </div>
+    <form class="AICorp-form">
+      <input type="file" id="fileselect"" accept=".jpeg,.jpg,.png,.gif" onchange="handleFile(this.files)">
+      <label class="button" for="fileselect" style="text-align: center;font-weight: bold;">Upload your secret</label>
+    </form>
+
+    <progress id="progress-bar" class="w3-deep-Indigo" max=100 value=0></progress>
+
+    <div id="gallery" />
+
+  </div>
+
+  <br><br> <label id="result" style="color:black; font-size: large;"></label>
+  <label id="resultscore" style="color:black; font-size: small;"></label>
+
+  <br<br>
+
+    <p style="font-size:x-small;align-content:center;"><br>Images are only held in memory for
+      processing. They are not stored.</p>
+
+</body>
+
+<script>
+
+  // ************************ Drag and drop ***************** //
+  let dropArea = document.getElementById("drop-area")
+
+    // Prevent default drag behaviors
+    ;['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+      dropArea.addEventListener(eventName, preventDefaults, false)
+      document.body.addEventListener(eventName, preventDefaults, false)
+    })
+
+    // Highlight drop area when item is dragged over it
+    ;['dragenter', 'dragover'].forEach(eventName => {
+      dropArea.addEventListener(eventName, highlight, false)
+    })
+
+    ;['dragleave', 'drop'].forEach(eventName => {
+      dropArea.addEventListener(eventName, unhighlight, false)
+    })
+
+  // Handle dropped files
+  dropArea.addEventListener('drop', handleDrop, false)
+
+  function preventDefaults(e) {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
+  function highlight(e) {
+    dropArea.classList.add('highlight')
+  }
+
+  function unhighlight(e) {
+    dropArea.classList.remove('active')
+  }
+
+  function handleDrop(e) {
+    var dt = e.dataTransfer
+    var files = dt.files
+    handleFile(files)   //handle only single file
+  }
+
+  let uploadProgress = []
+  let progressBar = document.getElementById('progress-bar')
+  let result = document.getElementById('result')
+  let resultScore = document.getElementById('resultscore')
+
+  function initializeProgress(numFiles) {
+    progressBar.value = 0
+    uploadProgress = []
+
+    for (let i = numFiles; i > 0; i--) {
+      uploadProgress.push(0)
+    }
+  }
+
+  function updateProgress(fileNumber, percent) {
+    uploadProgress[fileNumber] = percent
+    let total = uploadProgress.reduce((tot, curr) => tot + curr, 0) / uploadProgress.length
+    console.debug('update', fileNumber, percent, total)
+    progressBar.value = total
+  }
+
+  function updateResult(responseData) {
+    console.debug('result', responseData)
+    response = JSON.parse(responseData)
+    result.innerText = response.text
+    <!--    resultscore.innerText = "Prediction Score: " + response.score + "%" -->
+  }
+
+
+  //single file only
+  function handleFile(files) {
+    file = files[0]
+    initializeProgress(1)
+    result.innerText = ""
+    resultscore.innerText = ""
+    uploadFile(file, 0)
+    previewFile(file)
+  }
+  // function handleFiles(files) {
+  //   files = [...files]
+  //   initializeProgress(files.length)
+  //   files.forEach(uploadFile)
+  //   files.forEach(previewFile)
+  // }
+
+  function previewFile(file) {
+    //console.log(file)
+    let reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onloadend = function () {
+      let img = document.createElement('img')
+      img.src = reader.result
+      document.getElementById('gallery').innerHTML = "" //clear for single file
+      document.getElementById('gallery').appendChild(img)
+    }
+  }
+
+  function uploadFile(file, i) {
+    var url = '/AICorp/'
+    var xhr = new XMLHttpRequest()
+    var formData = new FormData()
+    xhr.open('POST', url, true)
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+
+    // Update progress (can be used to show progress indicator)
+    xhr.upload.addEventListener("progress", function (e) {
+      updateProgress(i, (e.loaded * 100.0 / e.total) || 100)
+    })
+
+    xhr.addEventListener('readystatechange', function (e) {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        updateProgress(i, 100) // <- Add this
+        updateResult(xhr.responseText)
+      }
+      else if (xhr.readyState == 4 && xhr.status != 200) {
+        result.innerText = "Oops, something went wrong"
+        resultscore.innerText = ""
+      }
+    })
+
+    formData.append('file', file)
+    xhr.send(formData)
+  }
+</script>
+
+</html>
