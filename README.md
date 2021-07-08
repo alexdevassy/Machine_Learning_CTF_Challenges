@@ -6,6 +6,8 @@ As artificial intelligence and machine learning are concurring the world :earth_
 be implemented in machine learning applications.  
 
 #### CTF Challenges :open_file_folder:
-+ Fourtune : **In this web application challenge, the :detective: security researcher needs to bypass AI Corp's Identity Verification neural network.**
++ [Fourtune](/Fourtune_ML_CTF_Challenge/) : **In this web application challenge, the :detective: security researcher needs to bypass AI Corp's Identity Verification neural network.**
 
-:thought_balloon: If you want to contribute to the above list of CTF challenges (please do), send me a pull request or ping me @josephmisiti. Stay tuned for more challenges being added to the repo. :eyes:
+:thought_balloon: If you want to contribute to the above list of CTF challenges (please do), send me a pull request or ping me at [![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://in.linkedin.com/in/alex-devassy-358421138) 
+
+Stay tuned for more challenges being added to the repo. :eyes:
