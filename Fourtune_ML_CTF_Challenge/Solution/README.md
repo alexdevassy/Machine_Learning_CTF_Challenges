@@ -22,13 +22,13 @@ If you are using HDFView, don't forget to reload model as Read/Write!
 Open model.h5 file in HDFView and navigate to Neural Network Model layout,  
 /model_weights/ node and double clicking on layer_names attribute
 
-**img here**
-
+<kbd>![Alt text](../Images/1_layers_NN.PNG?raw=true "1_layers_NN")</kbd>
+   
 From there, it can been seen that dense_2 is the final layer
 
 bias:0 @ /model_weights/dense_2/dense_2/
 
-**img here**
+<kbd>![Alt text](../Images/5_bias0.PNG?raw=true "5_bias0")</kbd>
 
 **What was the model trained with?**
 
@@ -53,7 +53,7 @@ It is not required to get the exact image to bypass AI Corp's Identity Verificat
 A network can be actually trained to do exactly this, by misusing the power :zap: of backpropagation. Backpropagation begins at the back of the
 network and subsequently ”tells” each layer how to modify itself to generate the output the next one requires. Now, if we take an existing network and simply add some layers in-front of it, we can use backpropagation to tell these layers how to generate the inputs it needs to produce a specific output. We just need to make sure to not change the original network and only let the new layers train,
 
-**img here**
+<kbd>![Alt text](../Images/Network.PNG?raw=true "Network")</kbd>
 
 A single layer of new neurons (blue, dashed) is connected in front
 of an existing network (red, dashed). It is only required to train the new neurons and keep the old network unchanged.
@@ -72,7 +72,7 @@ to generate just one single image that gives us access.
    input to the target network :robot:, so that "access granted" lights up
 5. **Misspelling of challenge name is intentional :stuck_out_tongue_winking_eye: "Fourtune" => "4tune"**
 
-Implementation of solution is available in solution.py    
+Implementation of solution is available in [solution.py](solution.py)    
 Run solution.py using python as `python solution.py` and upload the generated image (fake_id.png) to AI Corp's Identity Verification :unlock: to get the flag **++BackPropogation Magic++** :trophy::medal_sports:
 
 solution.py was tested in below env settings :hammer_and_wrench:
