@@ -27,3 +27,9 @@ Web application can be accessed in host systems browser at http://127.0.0.1:8080
 **For solving CTF, it's not necessary to login into the docker container. [Model.h5](model.h5) file in this repo can be used for initial foothold.**
 
 For solution to CTF challenge visit : [Fourtune_CTF_Solution](Solution/)
+
+#### References
++ Ian J. Goodfellow, Jonathon Shlens, and Christian Szegedy. Explaining
+and harnessing adversarial examples. ICLR, 2015.
++ Alexey Kurakin, Ian Goodfellow, and Samy Bengio. Adversarial examples in the physical world. ICLR, 2016.
++ [Hacking Neural Networks: A Short Introduction](https://arxiv.org/pdf/1911.07658.pdf)
