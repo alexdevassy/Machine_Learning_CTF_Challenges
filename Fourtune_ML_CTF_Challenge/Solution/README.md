@@ -81,3 +81,9 @@ solution.py was tested in below env settings :hammer_and_wrench:
 + tensorflow 2.4.1
 + keras 2.4.3
 + numpy 1.19.5
+
+**solution.py can be tested in jupyter lab inside docker container**
+
+Execute container as root user `docker exec -it -u root <container id> bash`
+
+Inside container deploy jupyter lab with `jupyter lab --allow-root`
