@@ -12,8 +12,8 @@ Pull CTF image from docker hub:
 
 To view the pulled images and their ID's use `docker images`
 
-Create container from image using `docker run -i -t -p 8080:8080 -p 80:80 <image ID> /bin/bash`
-use `exit` command to come out of the shell
+Create container from image using `docker run -i -t -p 8080:8080 -p 8888:8888 <image ID> /bin/bash`
+use `exit` command to come out of the shell. Port 8080 is for accessing web application and port 8888 is for accessing jupyter lab
 
 To view the created container use `docker ps -a`
 
