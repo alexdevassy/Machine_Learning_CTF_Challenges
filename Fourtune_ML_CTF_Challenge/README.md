@@ -12,10 +12,12 @@ Pull CTF image from docker hub:
 
 To view the pulled images and their ID's use `docker images`
 
-Create container from image using `docker run -i -t -p 80:80 <image ID> /bin/bash`
+Create container from image using `docker run -i -t -p 8080:8080 -p 80:80 <image ID> /bin/bash`
 use `exit` command to come out of the shell
 
 To view the created container use `docker ps -a`
+
+To restart the container use `docker start <container ID>`
 
 Spin up the web app using `docker exec -it -u root <container ID> python /home/FourtuneMLCTF/server.py`
 
