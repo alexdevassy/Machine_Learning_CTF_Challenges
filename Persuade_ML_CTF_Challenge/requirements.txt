@@ -1,0 +1,4 @@
+torch==2.0.1
+transformers==4.31.0
+scipy==1.10.1
+flask==2.3.3
