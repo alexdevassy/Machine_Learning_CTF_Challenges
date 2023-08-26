@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Corp Sentiment Analyzer</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Upload Your Custom Model or Use The Available Model</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="list-unstyled">
+                    {% for message in messages %}
+                        <li class="alert alert-info">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <form method="POST" enctype="multipart/form-data">
+            <div class="custom-file mb-3">
+                <input type="file" class="custom-file-input" id="customFile" name="file">
+                <label class="custom-file-label" for="customFile">Choose a .pt file</label>
+            </div>
+            <button type="submit" class="btn btn-primary" id="uploadButton">Upload</button>
+        </form>
+
+        {% if uploaded_files %}
+        <form method="POST" action="/analyze"> <!-- Use the /analyze route -->
+            <div class="form-group">
+                <label for="modelSelect">Select an uploaded file:</label>
+                <select class="form-control" id="modelSelect" name="model_file">
+                    <option value="">Select an uploaded file</option>
+                    {% for filename in uploaded_files %}
+                        <option value="{{ filename }}">{{ filename }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="userInput">Enter your statement:</label>
+                <input type="text" class="form-control" id="userInput" name="user_input" placeholder="Enter your statement">
+            </div>
+            
+            <button type="submit" class="btn btn-primary" name="analyze_button">Analyze</button> <!-- Add the name attribute to identify the button -->
+        </form>
+        {% endif %}
+    </div>
+
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
