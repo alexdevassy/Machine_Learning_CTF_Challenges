@@ -81,3 +81,5 @@ Now the web application (AI Corp Sentiment Analyzer) can be accessed in host sys
 The machine in which CTF is deployed needs to have internet connectivity for downloading label mapping. 
 
 For solution to CTF challenge visit : [Persuade_CTF_Solution](Solution/)
+
+https://github.com/alexdevassy/Machine_Learning_CTF_Challenges/assets/31893005/c7421f37-49b0-48b9-9c31-ae991ce1fa30
