@@ -1,13 +1,16 @@
 # Machine Learning CTF Challenges
 
-As artificial intelligence and machine learning are concurring the world :earth_asia:, it becomes of most interest to evaluate the impact on cybersecurity caused by AI & ML. Most of the AI / ML innovations in cybersecurity are related to cyber defense / cyber threat intelligence, for example, intelligent SIEM programs, AI-powered malware scanners, etc. But the real question is “Can researchers leverage AI / ML for offensive security OR Can they beat AI / ML algorithms with custom build cybersecurity practices?”. It turns out, that’s the new frontier :dart: in offensive security.
+As the realms of artificial intelligence and machine learning continue to shape our world :earth_asia:, the imperative to assess their influence on cybersecurity intensifies. While many AI/ML breakthroughs in cybersecurity revolve around defense and threat intelligence, such as intelligent :computer: SIEM systems and AI-driven malware detection, an intriguing question arises: "Can researchers harness AI/ML for offensive security, or can they outmaneuver AI/ML algorithms with innovative cybersecurity approaches?" This presents a captivating new horizon in the domain of offensive security.🚀
 
-**This repository contains CTF (Capture The Flag :triangular_flag_on_post:) challenges designed and implemented in machine learning applications.** Each challenge is organized into separate independent modules. The main focus area of this repo is to show the importance of cybersecurity practices that need to
-be implemented in machine learning applications.  
+Within this repository lie an array of engaging CTF (Capture The Flag :triangular_flag_on_post:) challenges meticulously crafted for applications which leverage machine learning algorithms in their backend. The intent of this repository to emphasize the need for implementation of security measures within machine learning applications, safeguarding 🛡️ them against the ever-evolving threat landscape. It serves as a guiding beacon in fortifying the convergence of technology and security🔒. 
 
 #### CTF Challenges :open_file_folder:
-+ [Fourtune](/Fourtune_ML_CTF_Challenge/) : **In this web application challenge, the :detective: security researcher needs to bypass AI Corp's Identity Verification neural network.**
+| Name | Category | Description | Difficulty |
+| --- | --- | --- | --- |
+| [Fourtune](/Fourtune_ML_CTF_Challenge/)  | Web - Model Extraction Attack | Bypass AI Corp's identity verification to view the flag | Hard |
+| [Persuade](/Persuade_ML_CTF_Challenge/) | Web - Model Serialization Attack | Flag is at /app/InternalFolder/Flag.txt, not on the website. Find it. | Medium |
 
-:thought_balloon: If you want to contribute to the above list of CTF challenges (please do), send me a pull request or ping me at [![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://in.linkedin.com/in/alex-devassy-358421138) 
+
+:thought_balloon: If you want to contribute to the above list of CTF challenges (please do), submit a pull request or ping me at [![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://in.linkedin.com/in/alex-devassy-358421138) 
 
 Stay tuned for more challenges being added to the repo. :eyes:
