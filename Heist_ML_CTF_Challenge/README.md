@@ -35,3 +35,9 @@ Dont peak into app.py. Everything you need to conquer this CTF is neatly tucked 
 For solution to CTF challenge visit : [Heist_CTF_Solution](Solution/)
 
 :no_entry_sign: A quick heads-up: The video below is contains CTF solution spoilers :sweat_smile:. So, if you're still up for the challenge and enjoy a bit of mystery, it might be best to steer clear of this one.  
+
+
+
+https://github.com/alexdevassy/Machine_Learning_CTF_Challenges/assets/31893005/94dbe135-500c-46b0-8db9-684a2d647aef
+
+
