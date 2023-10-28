@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.rawgit.com/dpb587/multipart-ajax@v1.4.0/multipart-ajax.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Police Department</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #1f2937;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+        nav {
+            background-color: #233446;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav li {
+            display: inline;
+            margin: 0 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+        }
+        .container {
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>City Police Department</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+            <form action="/logout" method="get">
+                <li style="float: right;"><button type="submit">Logout</button></li>
+            </form>
+        </ul>
+    </nav>
+    <div class="container">
+        <h2>Welcome to the City Police Department</h2>
+        <p>
+            You are currently logged in as: <strong>{{ current_user }}</strong>
+        </p>
+        <p>
+            The City Police Department is committed to ensuring the safety and security of our community. Our dedicated
+            officers and staff work tirelessly to maintain law and order.
+        </p>
+        <form id="notification-form" action="/notification" method="GET">
+            <!-- Add a notification icon (bell icon) -->
+            <div id="notification-icon">
+                <p>Notifications <button type="submit"
+                        style="background: transparent; border: none;"><span>&#128276;</span></button></p>
+            </div>
+            <!-- Add a hidden notification message -->
+            <div id="notification-message">
+                <p>{{notificationmessage}}</p>
+            </div>
+        </form>
+        <h3>Upload Data</h3>
+        <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="config_file" accept=".zip" required>
+            <button type="submit">Upload</button>
+        </form>
+        <div class="progress">
+            <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+        </div>
+        <p id="progress-text"></p>
+        <p><strong><span id="message">{{ message }}</span></strong></p>
+        <div>
+            <form id="train-form" action="/train" method="POST" style="display: none;">
+                <h3>Train Model</h3>
+                <button type="submit" id="trainButton">Train</button>
+                <div id="loadingMessage" style="display: none;">Started Training Process...</div>
+                <div id="response" style="display: none;"></div>
+            </form>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#notification-form').submit(function (event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                },
+                    type: 'GET',
+                    url: '/notification',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        $('#notificationmessage').text(data.notificationmessage);
+                    }
+			});
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#upload-form').submit(function (event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    xhr: function () {
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener("progress", function (evt) {
+                            if (evt.lengthComputable) {
+                                var percentComplete = (evt.loaded / evt.total) * 100;
+                                $('#progress-bar').css('width', percentComplete + '%');
+                                $('#progress-text').text(percentComplete + '%');
+                            }
+                        }, false);
+                        return xhr;
+                    },
+                    type: 'POST',
+                    // Updates are only made to second checkpoint for security reasons
+                    url: '/upload',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        $('#progress-bar').css('width', '0%');
+                        $('#progress-text').text('');
+                        $('#message').text(data.message);
+                        if (data.config_uploaded) {
+                            $('#train-form').show();
+                        } else {
+                            // if uploaded file is not .h5
+                            $('#train-form').hide();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        document.getElementById("trainButton").addEventListener("click", function () {
+            // Hide the button
+            this.style.display = "none";
+            // Display the loading message while training happens 
+            //# Load the dataset
+            //(x_train, y_train), (x_test, y_test) = dataset.load_data()
+            //# Normalize the pixel values
+            //x_train, x_test = x_train / 255.0, x_test / 255.0
+            document.getElementById("loadingMessage").style.display = "block";
+            // Simulate a delay (you can replace this with your actual AJAX call)
+            setTimeout(function () {
+                simulateAjaxRequest();
+            }, 2000); // Simulated 2-second delay
+        });
+        function simulateAjaxRequest() {
+            // Simulate an AJAX request by using setTimeout
+            setTimeout(function () {
+                document.getElementById("loadingMessage").style.display = "none";
+                var responseDiv = document.getElementById("response");
+                responseDiv.style.display = "block";
+                responseDiv.innerHTML = "Training In Progress...";
+            }, 2000); // Simulated 2-second delay
+        }
+    </script>
+</body>
+</html>

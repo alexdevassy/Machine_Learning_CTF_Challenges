@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heist ML CTF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #888a88;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+
+            background-color: #1f2937;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+        h2 {
+            color: #ffffff;
+        }
+        nav {
+            background-color: #1f2124;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav li {
+            display: inline;
+            margin: 0 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #000000;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        p {
+            color: #ffffff;
+            font-size: 14px;
+            line-height: 1.6;
+
+        }
+        .video-container {
+            display: flex;
+            justify-content: center;
+            /* Center horizontally */
+            //align-items: center; /* Center vertically */
+            height: 100vh;
+            /* Adjust to your desired height */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Heist ML CTF Challenge</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="https://github.com/alexdevassy/Machine_Learning_CTF_Challenges">Github</a></li>
+
+            <li><a href="/CityPolice"><span style="color: red;">Start Challenge</span></a></li>
+            <!-- Link to start the CTF -->
+            <li><a href="/Reset">Reset</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h2 style="display: inline;">Welcome to the Heist ML Capture The Flag Challenge</h2>
+        <p style="display: inline; margin-left: 50px;"><span id="message">{{ reset_message }}</span></p>
+        <p>
+            In this daring CTF challenge, you're a vital member of a heist crew embarking on a mission to rob CityBank.
+            Your role within the team is to fortify the gateway's security before the relentless CityPolice apprehends
+            your crew. Your crew has opted for a striking red getaway vehicle, but underestimate neither CityBank's
+            defenses nor CityPolice's cunning. Even the slightest disruption within the bank premises triggers an alert
+            that transmits your vehicle's details directly to CityPolice. Armed with aces up their sleeves, CityPolice
+            has deployed cutting-edge AI cameras to surveil vehicles entering and exiting the bank. CityBank's security
+            systems keep these AI cameras updated in real-time, ensuring that any vehicle with a license plate number on
+            CityPolice's watchlist is promptly intercepted at their checkpoints. <span style="color: red;">Your mission: hack CityPolice's AI
+                cameras and secure a smooth escape for your red getaway car (43126) after the heist.</span>
+        </p>
+        <p>
+            Embark on your epic journey by hitting the "Start Challenge" button above. Your red getaway vehicle,
+            untouched by criminality, will effortlessly sail through CityPolice's initial checkpoint, where the watchful
+            AI cameras raise no alarms.
+        </p>
+        <p>
+            Give the "Simulate" button below a click, and witness the outcome of your efforts to outsmart CityPolice's
+            vigilant AI cameras.
+        </p>
+        <form action="/simulate" method="POST" id="simulateform">
+            <button type="submit" id="submit-button" style="background-color: #4CAF50; /* Green background */
+            border: none; /* No borders */
+            color: white; /* White text */
+            padding: 15px 32px; /* Some padding */
+            text-align: center; /* Center text */
+            text-decoration: none; /* No text decoration */
+            display: inline-block; /* Make it an inline block */
+            font-size: 16px; /* Font size */
+            margin: 4px 2px; /* Margin */
+            cursor: pointer; /* Mouse pointer on hover */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2); /* Add a shadow */
+            //font-family: 'Courier New', Courier, monospace;
+            //font-weight: bold;
+          ">Simulate</button>
+            <p><span id="message">{{ message }}</span></p>
+        </form>
+        <div id="video-container" class="video-container">
+            <video width="840" height="460" controls playsinline muted>
+                <source src="{{ url_for('static', filename=video_source) }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#simulateform').submit(function (event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    type: 'POST',
+                    url: '/simulate',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        $('#message').text(data.message);
+                        var video = $('#video-container video');
+                        video.find('source').attr('src', data.video_source);
+                        video[0].load();  
+                        $('#video-container').show();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
