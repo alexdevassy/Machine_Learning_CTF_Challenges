@@ -1,6 +1,6 @@
 # Heist ML CTF Challenges
 
-In this web application challenge, the :detective: security researcher needs to compromise CityPolice's AI cameras and secure a smooth escape for their red getaway car :red_car: after the heist. 
+In this web application challenge, the :detective: security researcher needs to compromise CityPolice's AI cameras and secure a smooth escape for Heist crews red getaway car :red_car: after the heist. 
 
 ![Alt text](Images/Banner.PNG?raw=true "Banner")
 
