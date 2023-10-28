@@ -4,23 +4,23 @@ First and foremost, let's delve into the CTF Home Page. In a nutshell, it's all 
 
 Now, let's hit that 'Simulate' button and dive into the results. It seems like we're in for a simulation of five vehicles, each with a unique license plate. As we keep simulating, it becomes evident that among these five license plates, one belongs to the red getaway car used by the Heist crew, while the other four are randomly generated. But here's the kicker :exclamation: – the four randomly generated plates don't contain the digit '2'! That's right, '2' is exclusively reserved for the Heist crew's red car. 
 
-![Alt text](../Images/Solution_HomePage_1.png?raw=true "Solution_HomePage_1")
+![Alt text](../Images/Solution_HomePage_1.PNG?raw=true "Solution_HomePage_1")
 
 With the intel in hand, we're all set to kick off the CTF. Just tap that 'Start Challenge' and embark on your journey. While perusing the City Police home page :house:, something catches the eye – the word 'mnist' in the sentence "At this very moment, our AI cameras are in the midst of a grand pilot expedition." It's a head-scratcher, isn't it? Was it an intentional twist or a quirky typo :see_no_evil:? Either way, it's got a whiff of intrigue about it. 
 
-![Alt text](../Images/Solution_CityPoliceHomePage_1.png?raw=true "Solution_CityPoliceHomePage_1")
+![Alt text](../Images/Solution_CityPoliceHomePage_1.PNG?raw=true "Solution_CityPoliceHomePage_1")
 
 There isn't much in City Police home page. Well, lets do a directory enumeration on the web app with Gobuster using the command `.\gobuster.exe dir -u http://127.0.0.1:5000/ -w ..\wordlists\common.txt` 
 
-![Alt text](../Images/Solution_gobuster_1.png?raw=true "Solution_gobuster_1")
+![Alt text](../Images/Solution_gobuster_1.PNG?raw=true "Solution_gobuster_1")
 
 Thats good news, will continue to explore /admin page. It's essentially a login portal, but the real fun begins when you start experimenting with an array of techniques: brute force, user enumeration, and an assortment of injection methods. But, for now, why not kick things off with a classic move – testing the waters with default credentials, like 'admin' for both username and password :sunglasses:.
 
-![Alt text](../Images/Solution_AdminPage_1.png?raw=true "Solution_AdminPage_1")
+![Alt text](../Images/Solution_AdminPage_1.PNG?raw=true "Solution_AdminPage_1")
 
 Absolutely nailed it! Smooth sailing so far. Let's dig into the page. That bell icon :bell:, just oozes intrigue, doesn't it? Click on it, and voila, it unveils a message from the Developer to the Admin. Now, that's piquing our curiosity.  
 
-![Alt text](../Images/Solution_AdminPage_Message_1.png?raw=true "Solution_AdminPage_Message_1")
+![Alt text](../Images/Solution_AdminPage_Message_1.PNG?raw=true "Solution_AdminPage_Message_1")
 
 Noting down the points :pencil: in message from Developer to Admin
 
@@ -29,8 +29,8 @@ Noting down the points :pencil: in message from Developer to Admin
 
 However, there's a lingering sense that we're missing some crucial pieces of the puzzle :neutral_face:. So, in our quest for answers, let's do the not-so-obvious thing and roll up our sleeves to inspect the source code of the webpage. Who knows, it might be hiding more secrets than it's revealing.
 
-![Alt text](../Images/Solution_AdminPage_Code_1.png?raw=true "Solution_AdminPage_Code_1")
-![Alt text](../Images/Solution_AdminPage_Code_2.png?raw=true "Solution_AdminPage_Code_2")
+![Alt text](../Images/Solution_AdminPage_Code_1.PNG?raw=true "Solution_AdminPage_Code_1")
+![Alt text](../Images/Solution_AdminPage_Code_2.PNG?raw=true "Solution_AdminPage_Code_2")
 
 Wow, thats lot of info. Noting down the informaitons from code in below bulletin points :pencil:
 
@@ -85,14 +85,14 @@ with h5py.File('Malicious_mnist_dataset.h5', 'w') as file:
     file.create_dataset('y_test', data=y_test)
 ```
 
-![Alt text](../Images/Solution_Colab_1.png?raw=true "Solution_Colab_1")
+![Alt text](../Images/Solution_Colab_1.PNG?raw=true "Solution_Colab_1")
 
 The generated 'Malicious_mnist_dataset.h5' can be downloaded and zipped for uploading to the application. Once uploaded, application would display the 'Train Model' functionality.
 
-![Alt text](../Images/Solution_Train_1.png?raw=true "Solution_Train_1")
+![Alt text](../Images/Solution_Train_1.PNG?raw=true "Solution_Train_1")
 
-![Alt text](../Images/Solution_Train_2.png?raw=true "Solution_Train_2")
+![Alt text](../Images/Solution_Train_2.PNG?raw=true "Solution_Train_2")
 
 Once the training is complete, we can go back to CTF Home Page and see if had bypassed AI cameras to City Police by clicking on the 'Simulate' button. 
 
-![Alt text](../Images/Solution_Bypassed_2.png?raw=true "Solution_Bypassed_2")
+![Alt text](../Images/Solution_Bypassed_2.PNG?raw=true "Solution_Bypassed_2")
