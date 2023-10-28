@@ -7,8 +7,10 @@ Within this repository lie an array of engaging CTF (Capture The Flag :triangula
 #### CTF Challenges :open_file_folder:
 | Name | Category | Description | Difficulty |
 | --- | --- | --- | --- |
-| [Fourtune](/Fourtune_ML_CTF_Challenge/)  | Web - Model Extraction Attack | Bypass AI Corp's identity verification to view the flag | Hard |
 | [Persuade](/Persuade_ML_CTF_Challenge/) | Web - Model Serialization Attack | Flag is at /app/InternalFolder/Flag.txt, not on the website. Find it. | Medium |
+| [Heist](/Heist_ML_CTF_Challenge/) | Web - Data Poisoning Attack | Compromise CityPolice's AI cameras and secure a smooth escape for Heist crews red getaway car ! | Medium |
+| [Fourtune](/Fourtune_ML_CTF_Challenge/)  | Web - Model Extraction Attack | Bypass AI Corp's identity verification to view the flag | Hard |
+
 
 
 :thought_balloon: If you want to contribute to the above list of CTF challenges (please do), submit a pull request or ping me at [![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://in.linkedin.com/in/alex-devassy-358421138) 
