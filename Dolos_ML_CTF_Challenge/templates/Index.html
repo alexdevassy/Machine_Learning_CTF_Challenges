@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Chat App</title>
+</head>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f8ff;
+}
+
+.hero-banner {
+    text-align: center;
+    padding: 50px 0;
+    background-color: #e8eef2;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.hero-banner h1 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.hero-banner p {
+    font-size: 1.2em;
+    color: #666;
+}
+
+.chat-container {
+    padding: 30px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+}
+
+
+#chat-history {
+    height: 200px;
+    overflow-y: auto;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+    font-size: 1.1em;
+}
+
+.textbox {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 1.1em;
+}
+
+.textbox:focus {
+    outline: none;
+    border-color: #333;
+}
+
+.button {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-top: 10px;
+}
+
+.button:hover {
+    background-color: #444;
+}
+</style>
+<body>
+    <div class="hero-banner">
+        <h1>Let's Talk!</h1>
+        <p>Your personal AI companion for anything under the sun.</p>
+    </div>
+    <div class="chat-container">
+        <div id="chat-history">
+		
+            <div id="notification-container" style="display: none;">
+                <p>Please wait, while we process the input</p>
+            </div>
+        
+		{% if response_data %}
+            <div id="message-container">
+                <!--<p><b>Chat App:</b> {{ response_data }}</p>-->
+				<p><b>Chat App:</b> {{ response_data|replace('\n', '<br>')|safe }}</p>
+            </div>
+        {% endif %}
+		</div>
+        <form onsubmit="return sendMessage()">
+            <input type="text" id="user-input" class="textbox" placeholder="Say something..." required>		
+            <button type="submit" class="button">Send</button>
+        </form>
+    </div>
+    <script>
+		<!-- langchain-experimental 0.0.14 -->
+        function sendMessage() {
+			const notificationContainer = document.getElementById("notification-container");
+            if (notificationContainer) {
+                notificationContainer.style.display = "block";
+            }
+            const userInput = document.getElementById("user-input").value;
+			const messageContainer = document.getElementById("message-container");
+            if (messageContainer) {
+                messageContainer.style.display = "none";
+            }
+			const formData = new URLSearchParams();
+			formData.append('message', userInput);
+            fetch('/chat', {
+				method: 'POST',
+				body: formData,  
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded', // Set content type to application/x-www-form-urlencoded
+				}
+            })
+			.then(response => response.json())
+			.then(data => {
+				if (notificationContainer) {
+                notificationContainer.style.display = "none";
+				}
+				const chatHistory = document.getElementById("chat-history");
+				chatHistory.innerHTML += `<p><b>You:</b> ${userInput}</p>`;
+				if (data.response.redirect_url) {
+					
+					var form = document.createElement("form");
+					form.method = "POST";
+					form.action = data.response.redirect_url;
+					var input = document.createElement("input");
+					input.type = "hidden";
+					input.name = "value";
+					input.value = data.response.response_result;
+					form.appendChild(input);
+					
+					document.body.appendChild(form);
+					form.submit(); 
+				} else {
+					chatHistory.innerHTML += `<p><b>Chat App:</b> ${data.response.result}</p>`;
+				}
+				document.getElementById("user-input").value = "";
+			})
+			.catch(error => console.error(error));
+			return false;
+		}
+    </script>
+</body>
+</html>
