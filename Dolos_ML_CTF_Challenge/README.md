@@ -38,3 +38,9 @@ Now the web application (Interactive Chat App) can be accessed in host systems b
 Like always, the better you do reconissance on challenge, the easier its to solve. Otherwise you may run into rabbit holes pretty quickly.
 
 For solution to CTF challenge visit : [Dolos_CTF_Solution](Solution/)
+
+:no_entry_sign: A quick heads-up: The video below is contains CTF solution spoilers :sweat_smile:. So, if you're still up for the challenge and enjoy a bit of mystery, it might be best to steer clear of this one.  
+
+
+https://github.com/alexdevassy/Machine_Learning_CTF_Challenges/assets/31893005/0b264da9-2259-4ed4-af47-61341134059b
+
