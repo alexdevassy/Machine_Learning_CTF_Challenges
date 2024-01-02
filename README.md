@@ -7,10 +7,10 @@ Within this repository lie an array of engaging CTF (Capture The Flag :triangula
 #### CTF Challenges :open_file_folder:
 | Name | Category | Description | Difficulty | References
 | --- | --- | --- | --- | --- | 
-| [Dolos](/Dolos_ML_CTF_Challenge/) | Web - Prompt Injection Attack | Flag is at same directory as of flask app, [FLAG].txt. | Easy | [OWASP LLM01](https://llmtop10.com/llm01/)<br>[AML.T0051](https://atlas.mitre.org/techniques/AML.T0051/)
-| [Heist](/Heist_ML_CTF_Challenge/) | Web - Data Poisoning Attack | Compromise CityPolice's AI cameras and secure a smooth escape for Heist crews red getaway car ! | Medium | [OWASP LLM03](https://llmtop10.com/llm03/)<br>[AML.T0020](https://atlas.mitre.org/techniques/AML.T0020/)
-| [Persuade](/Persuade_ML_CTF_Challenge/) | Web - Model Serialization Attack | Flag is at /app/InternalFolder/Flag.txt, not on the website. Find it. | Medium | [OWASP LLM05](https://llmtop10.com/llm05/)<br>[AML.T0010](https://atlas.mitre.org/techniques/AML.T0010/)
-| [Fourtune](/Fourtune_ML_CTF_Challenge/)  | Web - Model Extraction Attack | Bypass AI Corp's identity verification to view the flag | Hard | [OWASP LLM10](https://llmtop10.com/llm10/)<br>[AML.T0044](https://atlas.mitre.org/techniques/AML.T0044/)
+| [Dolos](/Dolos_ML_CTF_Challenge/) | Web - Prompt Injection Attack | Flag is at same directory as of flask app, [FLAG].txt. | Easy | <ul><li> [OWASP LLM01](https://llmtop10.com/llm01/)</li><li>[AML.T0051](https://atlas.mitre.org/techniques/AML.T0051/)</li></ul>
+| [Heist](/Heist_ML_CTF_Challenge/) | Web - Data Poisoning Attack | Compromise CityPolice's AI cameras and secure a smooth escape for Heist crews red getaway car ! | Medium | <ul><li>[OWASP LLM03](https://llmtop10.com/llm03/)</li><li>[OWASP ML02](https://owasp.org/www-project-machine-learning-security-top-10/docs/ML02_2023-Data_Poisoning_Attack.html)</li><li>[AML.T0020](https://atlas.mitre.org/techniques/AML.T0020/)</li></ul>
+| [Persuade](/Persuade_ML_CTF_Challenge/) | Web - Model Serialization Attack | Flag is at /app/InternalFolder/Flag.txt, not on the website. Find it. | Medium | <ul><li>[OWASP LLM05](https://llmtop10.com/llm05/)</li><li>[OWASP ML06](https://owasp.org/www-project-machine-learning-security-top-10/docs/ML06_2023-AI_Supply_Chain_Attacks.html)</li><li>[AML.T0010](https://atlas.mitre.org/techniques/AML.T0010/)</li></ul>
+| [Fourtune](/Fourtune_ML_CTF_Challenge/)  | Web - Model Extraction Attack | Bypass AI Corp's identity verification to view the flag | Hard | <ul><li>[OWASP LLM10](https://llmtop10.com/llm10/)</li><li>[AML.T0044](https://atlas.mitre.org/techniques/AML.T0044/)</li></ul>
 
 
 
