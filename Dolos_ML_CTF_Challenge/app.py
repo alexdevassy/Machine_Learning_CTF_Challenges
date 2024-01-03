@@ -58,7 +58,7 @@ def chat():
     elif request.form.get('value'):
         value = request.form.get('value')
         try:
-            command = f"python3 aiexecuter.py --user_input=\"{user_input}\""
+            command = f"python3 aiexecuter.py --user_input=\"{user_input}\" --api_key=\"{openaiapikey}\""
             # Run the subprocess
             rawresult = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
             cleaned_result = remove_ansi_escape_codes(rawresult.stdout)
