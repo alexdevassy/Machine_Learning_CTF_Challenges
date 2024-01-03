@@ -1,5 +1,7 @@
 # Dolos ML CTF Challenges
 
+**_Please note this challenge is in development stage_** 
+
 In this web application challenge, the :detective: security researcher needs to think like Greek god DOLOS and trick the LLM to reveal the flag. 
 
 ![Alt text](Images/Banner1.PNG?raw=true "Banner")
