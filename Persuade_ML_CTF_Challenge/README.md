@@ -69,7 +69,9 @@ Activate the virtual enviornemnt `source /virtualspace/bin/activate`
 
 `cd app/`
 
-Make Uploads folder to host the model file `mkdir uploads`. Copy saved_model.pt to uploads folder. 
+Make Uploads folder in app directory to host the model file `mkdir uploads`. Copy saved_model.pt to uploads folder. 
+
+`/app/uploads/saved_model.pt`
 
 `python app.py`
 
