@@ -76,6 +76,10 @@ Its not a malicious model after all :exclamation:. But we know there is a possib
 ```python
 #Note: This code works well in Google Colab
 
+!git clone https://github.com/protectai/modelscan.git
+
+import torch
+import os
 from modelscan.notebooks.utils.pickle_codeinjection import PickleInject, get_payload
 
 command = "system"
