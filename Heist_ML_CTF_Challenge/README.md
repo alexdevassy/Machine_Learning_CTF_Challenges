@@ -6,7 +6,21 @@ In this web application challenge, the :detective: security researcher needs to 
 
 #### Setup :hammer_and_wrench:
 
-##### Setting Up Python Flask App To Host The Challenge
+:hand: :exclamation: :exclamation: ***Challenge can be either installed via docker as docker image (Stepab) OR via native installation (Step2b)*** :no_entry_sign:
+
+##### :point_right: Step 2a - Building Docker Image of the Application To Host The Challenge
+
+clone the repo using `git clone https://github.com/alexdevassy/Machine_Learning_CTF_Challenges.git`
+
+`cd Machine_Learning_CTF_Challenges\Heist_ML_CTF_Challenge/`
+
+`docker build -t heist_ml_ctf .`
+
+To run the challenge `docker run --rm -p 5000:5000 heist_ml_ctf`
+
+### OR
+
+##### :point_right: Step 2b - Setting Up Python Flask App To Host The Challenge
 
 The challenge works best with `Python 3.10.11`
 
