@@ -1,5 +1,5 @@
 # Use Ubuntu as the base image
-FROM ubuntu:latest
+FROM ubuntu:22.04
 
 # Update package lists and install Python 3.10 and pip
 RUN apt-get update && \
