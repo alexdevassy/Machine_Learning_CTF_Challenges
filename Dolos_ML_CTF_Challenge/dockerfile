@@ -1,0 +1,30 @@
+# Use Ubuntu as the base image
+FROM ubuntu:22.04
+
+# Update package lists and install Python 3.10 and pip
+RUN apt-get update && \
+    apt-get install -y python3.10 python3-pip
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the requirements file first to leverage Docker cache
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip3 install -r requirements.txt
+RUN apt-get install ca-certificates
+
+# Copy the application files and folders
+COPY app.py aiexecuter.py /app/
+#COPY 'M0st\$3cur3FLAG.txt' /app/ 
+ENV FLASK_APP=app.py
+COPY Images/ /app/Images/
+RUN touch /app/M0st$3cur3FLAG.txt
+COPY templates/ /app/templates/
+
+# Expose the port on which your Flask app runs
+EXPOSE 5000
+
+ENTRYPOINT ["python3", "app.py"]
+CMD ["--host", "0.0.0.0"]

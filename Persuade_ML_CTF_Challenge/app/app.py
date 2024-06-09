@@ -35,6 +35,7 @@ print(__header__)
 os.environ['TOKENIZERS_PARALLELISM'] = 'false'
 
 app = Flask(__name__)
+app.secret_key = 'supersecretkey'
 
 # Configure upload folder and allowed file extensions
 UPLOAD_FOLDER = 'uploads'
@@ -117,5 +118,5 @@ def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 if __name__ == '__main__':
-    app.secret_key = 'supersecretkey'
+    #app.secret_key = 'supersecretkey'
     app.run(host="0.0.0.0", port=5000)

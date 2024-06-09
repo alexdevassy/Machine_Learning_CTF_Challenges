@@ -6,7 +6,7 @@ In this web application challenge, the :detective: security researcher needs to 
 
 #### Setup :hammer_and_wrench: 
 
-##### Step 1 - Getting API Keys
+##### :point_right: Step 1 - Getting API Keys
 
 For hosting this challege, 2 API Keys are required.
 
@@ -14,7 +14,19 @@ For hosting this challege, 2 API Keys are required.
 
 2. Openai: Sign into [Openai Platform](https://platform.openai.com/playground), access API Keys section and create keys. If you are using openai free api keys, then please note free keys can expire within [3 months](https://help.openai.com/en/articles/4936830-what-happens-after-i-use-my-free-tokens-or-the-3-months-is-up-in-the-free-trial). 
 
-##### Step 2 - Setting Up Python Flask App To Host The Challenge
+:hand: :exclamation: :exclamation: ***Step 2 can be either building the docker image of application (Step2a) OR setting up the application in local machine (Step2b).*** :no_entry_sign:
+
+##### :point_right: Step 2a - Building Docker Image of the Application To Host The Challenge
+
+`cd Machine_Learning_CTF_Challenges/Dolos_ML_CTF_Challenge/`
+
+`docker build -t dolos_ml_ctf .`
+
+To run the challenge `docker run --rm -p 5000:5000 -ti dolos_ml_ctf --rebuffkey="<REBUFF_API_KEY>" --openaikey="<OPENAI_API_KEY>"`
+
+### OR
+
+##### :point_right: Step 2b - Setting Up Python Flask App To Host The Challenge
 
 The challenge works best in `Ubuntu` systems with `Python 3.8.10`
 

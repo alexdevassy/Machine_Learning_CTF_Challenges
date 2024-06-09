@@ -8,7 +8,7 @@ In this web application challenge, the :detective: security researcher needs to 
 
 To setup the challenge, its a 2 step process. 
 
-##### Step 1 - Downloading The Model
+##### :point_right: Step 1 - Downloading The Model
 
 Lets head into the Google colab and execute below code block in a new notebook.
 
@@ -34,26 +34,29 @@ task = "sentiment"
 MODEL = f"cardiffnlp/twitter-roberta-base-{task}"
 # PT
 model = AutoModelForSequenceClassification.from_pretrained(MODEL)
-torch.save(model,safe_model_path)import torch
-import os
-from transformers import AutoModelForSequenceClassification
-
-# Save a model for sentiment analysis
-model_directory = "SavedModels"
-if not os.path.isdir(model_directory):
-    os.mkdir(model_directory)
-
-safe_model_path = os.path.join(model_directory, "saved_model.pt")
-
-task = "sentiment"
-MODEL = f"cardiffnlp/twitter-roberta-base-{task}"
-# PT
-model = AutoModelForSequenceClassification.from_pretrained(MODEL)
 torch.save(model,safe_model_path)
 ```
 From colab, download the saved_model.pt to local system.
 
-##### Step 2 - Setting Up Python Flask App To Host The Challenge
+Now lets clone the repo using `git clone https://github.com/alexdevassy/Machine_Learning_CTF_Challenges.git`
+
+Make Uploads folder in app directory to host the model file `mkdir uploads`. Copy saved_model.pt to uploads folder. 
+
+`Machine_Learning_CTF_Challenges/Persuade_ML_CTF_Challenge/app/uploads/saved_model.pt`
+
+:hand: :exclamation: :exclamation: ***Step 2 can be either building the docker image of application (Step2a) OR setting up the application in local machine (Step2b).*** :no_entry_sign:
+
+##### :point_right: Step 2a - Building Docker Image of the Application To Host The Challenge
+
+`cd Machine_Learning_CTF_Challenges/Persuade_ML_CTF_Challenge/`
+
+`docker build -t persuade_ml_ctf .`
+
+To run the challenge `docker run --rm --expose=9000 -p 9000:9000 -p 5000:5000 -ti persuade_ml_ctf`
+
+### OR
+
+##### :point_right: Step 2b - Setting Up Python Flask App To Host The Challenge
 
 The challenge works best in `Ubuntu` systems with `Python 3.8.10`
 
@@ -61,15 +64,11 @@ Create virtual enviornment in python using `python -m venv virtualspace`
 
 Activate the virtual enviornemnt `source /virtualspace/bin/activate`
 
-`git clone https://github.com/alexdevassy/Machine_Learning_CTF_Challenges.git`
-
 `cd Machine_Learning_CTF_Challenges/Persuade_ML_CTF_Challenge/`
 
 `pip install -r .\requirements.txt`
 
 `cd app/`
-
-Make Uploads folder to host the model file `mkdir uploads`. Copy saved_model.pt to uploads folder. 
 
 `python app.py`
 

