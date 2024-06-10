@@ -1,0 +1,5 @@
+Flask==2.2.2
+Werkzeug==2.2.2
+llama-index==0.10.39
+pydantic == 2.7.1
+ipython==8.12.3
