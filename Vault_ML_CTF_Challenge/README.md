@@ -54,4 +54,5 @@ For solution to CTF challenge visit : [Vault_CTF_Solution](Solution/)
 
 :no_entry_sign: A quick heads-up: The video below contains CTF solution spoilers :sweat_smile:. So, if you're still up for the challenge and enjoy a bit of mystery, it might be best to steer clear of this one.  
 
+https://github.com/user-attachments/assets/43831391-9238-4e49-9baf-f8ae55a7b023
 
