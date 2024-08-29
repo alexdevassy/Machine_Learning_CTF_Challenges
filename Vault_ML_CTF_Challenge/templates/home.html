@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Selection Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            /* background-color: #f4f4f4; */
+            padding: 20px;
+            background-image: url('../images/backgrnd.jpg'); /* Replace 'your_image.jpg' with your image path */
+            background-repeat: no-repeat; /* Prevents image repetition */
+            background-size: cover; /* Scales image to cover entire background */
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .custom-select {
+            position: relative;
+            display: inline-block;
+            width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .select-selected {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            border: none;
+            display: flex;
+            align-items: center;
+            opacity: 0.7;
+        }
+
+        .select-selected img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        .select-items {
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            z-index: 99;
+            display: none;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .select-items div {
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .select-items div img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        .select-items div:hover {
+            background-color: #ddd;
+        }
+
+        button {
+            background-color: #000000;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+        .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 70vh; /* Adjust height as needed */
+        }
+        /* Notification styles */
+        .notification {
+            display: none; /* Initially hidden */
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            background-color: #555;
+            color: #333;
+            /*display: flex;*/
+            justify-content: center;
+            align-items: center;  
+        }
+        .notification.success {
+            border-color: #ccc;
+            color: #ccc;
+        }
+        .notification.error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+        .ascii-art {
+            white-space: pre; /* Preserve spaces and line breaks */
+            font-size: 12px; /* Adjust font size as needed */
+            color: #ccc;
+        }
+ 
+    </style>
+</head>
+<body>
+    <!-- <h1>Select Images</h1> -->
+    <div class="container" style="background-color: rgba(0, 0, 0, 0.5);" >
+        <pre style="position: absolute; top: 20%; left:50%; transform: translate(-50%, -50%);color: rgb(151, 151, 151);" >
+            .------------------------------------------------------------------------------------.
+            |                                                                                    |
+            | __/\\\________/\\\_______________________________/\\\\\\__________________         |
+            |  _\/\\\_______\/\\\______________________________\////\\\__________________        |
+            |   _\//\\\______/\\\__________________________________\/\\\________/\\\______       |
+            |    __\//\\\____/\\\____/\\\\\\\\\_____/\\\____/\\\____\/\\\_____/\\\\\\\\\\\_      |
+            |     ___\//\\\__/\\\____\////////\\\___\/\\\___\/\\\____\/\\\____\////\\\////__     |
+            |      ____\//\\\/\\\_______/\\\\\\\\\\__\/\\\___\/\\\____\/\\\_______\/\\\______    |
+            |       _____\//\\\\\_______/\\\/////\\\__\/\\\___\/\\\____\/\\\_______\/\\\_/\\__   |
+            |        ______\//\\\_______\//\\\\\\\\/\\_\//\\\\\\\\\___/\\\\\\\\\____\//\\\\\___  |
+            |         _______\///_________\////////\//___\/////////___\/////////______\/////____ |
+            |                                                                                    |
+            '------------------------------------------------------------------------------------'
+        
+        </pre>
+    <form id="imageForm">
+        <div class="custom-select" id="customDropdown1">
+            <div class="select-selected">
+                <span>Select an image ...</span>
+            </div>
+            <div class="select-items">
+                <div data-value="Robert"><img src="../images/1.PNG" alt="Image 1"></div>
+                <div data-value="Louisa"><img src="../images/2.PNG" alt="Image 2"></div>
+                <div data-value="James"><img src="../images/3.PNG" alt="Image 3"></div>
+                <div data-value="Claudia"><img src="../images/4.PNG" alt="Image 4"></div>
+                <div data-value="John"><img src="../images/5.PNG" alt="Image 5"></div>
+                <div data-value="Alex"><img src="../images/6.PNG" alt="Image 6"></div>
+                <div data-value="Thomas"><img src="../images/7.PNG" alt="Image 7"></div>
+                <div data-value="Kevin"><img src="../images/8.PNG" alt="Image 8"></div>
+                <div data-value="Donald"><img src="../images/9.PNG" alt="Image 9"></div>
+                <div data-value="Ethan"><img src="../images/10.PNG" alt="Image 10"></div>
+                <div data-value="Luke"><img src="../images/11.PNG" alt="Image 11"></div>
+                <div data-value="Jeff"><img src="../images/12.PNG" alt="Image 12"></div>
+                <div data-value="Mark"><img src="../images/13.PNG" alt="Image 13"></div>
+                <div data-value="Aben"><img src="../images/14.PNG" alt="Image 14"></div>
+                <div data-value="Mac"><img src="../images/15.PNG" alt="Image 15"></div>
+                <div data-value="Peter"><img src="../images/16.PNG" alt="Image 16"></div>
+                <div data-value="Charles"><img src="../images/17.PNG" alt="Image 17"></div>
+                <div data-value="Matthew"><img src="../images/18.PNG" alt="Image 18"></div>
+                <div data-value="Andrew"><img src="../images/19.PNG" alt="Image 19"></div>
+                <div data-value="Paul"><img src="../images/20.PNG" alt="Image 20"></div>
+                <div data-value="Brian"><img src="../images/21.PNG" alt="Image 21"></div>
+                <div data-value="George"><img src="../images/22.PNG" alt="Image 22"></div>
+                <div data-value="Joshua"><img src="../images/23.PNG" alt="Image 23"></div>
+                <div data-value="Ronald"><img src="../images/24.PNG" alt="Image 24"></div>
+                <div data-value="Ryan"><img src="../images/25.PNG" alt="Image 25"></div>
+                <div data-value="Eric"><img src="../images/26.PNG" alt="Image 26"></div>
+                <div data-value="Carla"><img src="../images/27.PNG" alt="Image 27"></div>
+                <div data-value="Larry"><img src="../images/28.PNG" alt="Image 28"></div>
+                <div data-value="Justin"><img src="../images/29.PNG" alt="Image 29"></div>
+                <div data-value="Philippa"><img src="../images/30.PNG" alt="Image 30"></div>
+                <div data-value="Gary"><img src="../images/31.PNG" alt="Image 31"></div>
+                <div data-value="Jerry"><img src="../images/32.PNG" alt="Image 32"></div>
+                <div data-value="Jason"><img src="../images/33.PNG" alt="Image 33"></div>
+                <div data-value="Frank"><img src="../images/34.PNG" alt="Image 34"></div>
+                <div data-value="Jack"><img src="../images/35.PNG" alt="Image 35"></div>
+                <div data-value="Logan"><img src="../images/36.PNG" alt="Image 36"></div>
+                <div data-value="Tony"><img src="../images/37.PNG" alt="Image 37"></div>
+                <div data-value="Dennis"><img src="../images/38.PNG" alt="Image 38"></div>
+                <div data-value="Tyler"><img src="../images/39.PNG" alt="Image 39"></div>
+                <div data-value="Jose"><img src="../images/40.PNG" alt="Image 40"></div>
+                <!-- Add more images up to 40 -->
+            </div>
+        </div>
+
+        <div class="custom-select" id="customDropdown2">
+            <div class="select-selected">
+                <span>Select an image...</span>
+            </div>
+            <div class="select-items">
+                <div data-value="Robert"><img src="../images/1.PNG" alt="Image 1"></div>
+                <div data-value="Louisa"><img src="../images/2.PNG" alt="Image 2"></div>
+                <div data-value="James"><img src="../images/3.PNG" alt="Image 3"></div>
+                <div data-value="Claudia"><img src="../images/4.PNG" alt="Image 4"></div>
+                <div data-value="John"><img src="../images/5.PNG" alt="Image 5"></div>
+                <div data-value="Alex"><img src="../images/6.PNG" alt="Image 6"></div>
+                <div data-value="Thomas"><img src="../images/7.PNG" alt="Image 7"></div>
+                <div data-value="Kevin"><img src="../images/8.PNG" alt="Image 8"></div>
+                <div data-value="Donald"><img src="../images/9.PNG" alt="Image 9"></div>
+                <div data-value="Ethan"><img src="../images/10.PNG" alt="Image 10"></div>
+                <div data-value="Luke"><img src="../images/11.PNG" alt="Image 11"></div>
+                <div data-value="Jeff"><img src="../images/12.PNG" alt="Image 12"></div>
+                <div data-value="Mark"><img src="../images/13.PNG" alt="Image 13"></div>
+                <div data-value="Aben"><img src="../images/14.PNG" alt="Image 14"></div>
+                <div data-value="Mac"><img src="../images/15.PNG" alt="Image 15"></div>
+                <div data-value="Peter"><img src="../images/16.PNG" alt="Image 16"></div>
+                <div data-value="Charles"><img src="../images/17.PNG" alt="Image 17"></div>
+                <div data-value="Matthew"><img src="../images/18.PNG" alt="Image 18"></div>
+                <div data-value="Andrew"><img src="../images/19.PNG" alt="Image 19"></div>
+                <div data-value="Paul"><img src="../images/20.PNG" alt="Image 20"></div>
+                <div data-value="Brian"><img src="../images/21.PNG" alt="Image 21"></div>
+                <div data-value="George"><img src="../images/22.PNG" alt="Image 22"></div>
+                <div data-value="Joshua"><img src="../images/23.PNG" alt="Image 23"></div>
+                <div data-value="Ronald"><img src="../images/24.PNG" alt="Image 24"></div>
+                <div data-value="Ryan"><img src="../images/25.PNG" alt="Image 25"></div>
+                <div data-value="Eric"><img src="../images/26.PNG" alt="Image 26"></div>
+                <div data-value="Carla"><img src="../images/27.PNG" alt="Image 27"></div>
+                <div data-value="Larry"><img src="../images/28.PNG" alt="Image 28"></div>
+                <div data-value="Justin"><img src="../images/29.PNG" alt="Image 29"></div>
+                <div data-value="Philippa"><img src="../images/30.PNG" alt="Image 30"></div>
+                <div data-value="Gary"><img src="../images/31.PNG" alt="Image 31"></div>
+                <div data-value="Jerry"><img src="../images/32.PNG" alt="Image 32"></div>
+                <div data-value="Jason"><img src="../images/33.PNG" alt="Image 33"></div>
+                <div data-value="Frank"><img src="../images/34.PNG" alt="Image 34"></div>
+                <div data-value="Jack"><img src="../images/35.PNG" alt="Image 35"></div>
+                <div data-value="Logan"><img src="../images/36.PNG" alt="Image 36"></div>
+                <div data-value="Tony"><img src="../images/37.PNG" alt="Image 37"></div>
+                <div data-value="Dennis"><img src="../images/38.PNG" alt="Image 38"></div>
+                <div data-value="Tyler"><img src="../images/39.PNG" alt="Image 39"></div>
+                <div data-value="Jose"><img src="../images/40.PNG" alt="Image 40"></div>
+                <!-- Add more images up to 40 -->
+            </div>
+        </div>
+
+        <div class="custom-select" id="customDropdown3">
+            <div class="select-selected">
+                <span>Select an image...</span>
+            </div>
+            <div class="select-items">
+                <div data-value="Robert"><img src="../images/1.PNG" alt="Image 1"></div>
+                <div data-value="Louisa"><img src="../images/2.PNG" alt="Image 2"></div>
+                <div data-value="James"><img src="../images/3.PNG" alt="Image 3"></div>
+                <div data-value="Claudia"><img src="../images/4.PNG" alt="Image 4"></div>
+                <div data-value="John"><img src="../images/5.PNG" alt="Image 5"></div>
+                <div data-value="Alex"><img src="../images/6.PNG" alt="Image 6"></div>
+                <div data-value="Thomas"><img src="../images/7.PNG" alt="Image 7"></div>
+                <div data-value="Kevin"><img src="../images/8.PNG" alt="Image 8"></div>
+                <div data-value="Donald"><img src="../images/9.PNG" alt="Image 9"></div>
+                <div data-value="Ethan"><img src="../images/10.PNG" alt="Image 10"></div>
+                <div data-value="Luke"><img src="../images/11.PNG" alt="Image 11"></div>
+                <div data-value="Jeff"><img src="../images/12.PNG" alt="Image 12"></div>
+                <div data-value="Mark"><img src="../images/13.PNG" alt="Image 13"></div>
+                <div data-value="Aben"><img src="../images/14.PNG" alt="Image 14"></div>
+                <div data-value="Mac"><img src="../images/15.PNG" alt="Image 15"></div>
+                <div data-value="Peter"><img src="../images/16.PNG" alt="Image 16"></div>
+                <div data-value="Charles"><img src="../images/17.PNG" alt="Image 17"></div>
+                <div data-value="Matthew"><img src="../images/18.PNG" alt="Image 18"></div>
+                <div data-value="Andrew"><img src="../images/19.PNG" alt="Image 19"></div>
+                <div data-value="Paul"><img src="../images/20.PNG" alt="Image 20"></div>
+                <div data-value="Brian"><img src="../images/21.PNG" alt="Image 21"></div>
+                <div data-value="George"><img src="../images/22.PNG" alt="Image 22"></div>
+                <div data-value="Joshua"><img src="../images/23.PNG" alt="Image 23"></div>
+                <div data-value="Ronald"><img src="../images/24.PNG" alt="Image 24"></div>
+                <div data-value="Ryan"><img src="../images/25.PNG" alt="Image 25"></div>
+                <div data-value="Eric"><img src="../images/26.PNG" alt="Image 26"></div>
+                <div data-value="Carla"><img src="../images/27.PNG" alt="Image 27"></div>
+                <div data-value="Larry"><img src="../images/28.PNG" alt="Image 28"></div>
+                <div data-value="Justin"><img src="../images/29.PNG" alt="Image 29"></div>
+                <div data-value="Philippa"><img src="../images/30.PNG" alt="Image 30"></div>
+                <div data-value="Gary"><img src="../images/31.PNG" alt="Image 31"></div>
+                <div data-value="Jerry"><img src="../images/32.PNG" alt="Image 32"></div>
+                <div data-value="Jason"><img src="../images/33.PNG" alt="Image 33"></div>
+                <div data-value="Frank"><img src="../images/34.PNG" alt="Image 34"></div>
+                <div data-value="Jack"><img src="../images/35.PNG" alt="Image 35"></div>
+                <div data-value="Logan"><img src="../images/36.PNG" alt="Image 36"></div>
+                <div data-value="Tony"><img src="../images/37.PNG" alt="Image 37"></div>
+                <div data-value="Dennis"><img src="../images/38.PNG" alt="Image 38"></div>
+                <div data-value="Tyler"><img src="../images/39.PNG" alt="Image 39"></div>
+                <div data-value="Jose"><img src="../images/40.PNG" alt="Image 40"></div>
+                <!-- Add more images up to 40 -->
+            </div>
+        </div>
+
+        <div class="custom-select" id="customDropdown4">
+            <div class="select-selected">
+                <span>Select an image...</span>
+            </div>
+            <div class="select-items">
+                <div data-value="Robert"><img src="../images/1.PNG" alt="Image 1"></div>
+                <div data-value="Louisa"><img src="../images/2.PNG" alt="Image 2"></div>
+                <div data-value="James"><img src="../images/3.PNG" alt="Image 3"></div>
+                <div data-value="Claudia"><img src="../images/4.PNG" alt="Image 4"></div>
+                <div data-value="John"><img src="../images/5.PNG" alt="Image 5"></div>
+                <div data-value="Alex"><img src="../images/6.PNG" alt="Image 6"></div>
+                <div data-value="Thomas"><img src="../images/7.PNG" alt="Image 7"></div>
+                <div data-value="Kevin"><img src="../images/8.PNG" alt="Image 8"></div>
+                <div data-value="Donald"><img src="../images/9.PNG" alt="Image 9"></div>
+                <div data-value="Ethan"><img src="../images/10.PNG" alt="Image 10"></div>
+                <div data-value="Luke"><img src="../images/11.PNG" alt="Image 11"></div>
+                <div data-value="Jeff"><img src="../images/12.PNG" alt="Image 12"></div>
+                <div data-value="Mark"><img src="../images/13.PNG" alt="Image 13"></div>
+                <div data-value="Aben"><img src="../images/14.PNG" alt="Image 14"></div>
+                <div data-value="Mac"><img src="../images/15.PNG" alt="Image 15"></div>
+                <div data-value="Peter"><img src="../images/16.PNG" alt="Image 16"></div>
+                <div data-value="Charles"><img src="../images/17.PNG" alt="Image 17"></div>
+                <div data-value="Matthew"><img src="../images/18.PNG" alt="Image 18"></div>
+                <div data-value="Andrew"><img src="../images/19.PNG" alt="Image 19"></div>
+                <div data-value="Paul"><img src="../images/20.PNG" alt="Image 20"></div>
+                <div data-value="Brian"><img src="../images/21.PNG" alt="Image 21"></div>
+                <div data-value="George"><img src="../images/22.PNG" alt="Image 22"></div>
+                <div data-value="Joshua"><img src="../images/23.PNG" alt="Image 23"></div>
+                <div data-value="Ronald"><img src="../images/24.PNG" alt="Image 24"></div>
+                <div data-value="Ryan"><img src="../images/25.PNG" alt="Image 25"></div>
+                <div data-value="Eric"><img src="../images/26.PNG" alt="Image 26"></div>
+                <div data-value="Carla"><img src="../images/27.PNG" alt="Image 27"></div>
+                <div data-value="Larry"><img src="../images/28.PNG" alt="Image 28"></div>
+                <div data-value="Justin"><img src="../images/29.PNG" alt="Image 29"></div>
+                <div data-value="Philippa"><img src="../images/30.PNG" alt="Image 30"></div>
+                <div data-value="Gary"><img src="../images/31.PNG" alt="Image 31"></div>
+                <div data-value="Jerry"><img src="../images/32.PNG" alt="Image 32"></div>
+                <div data-value="Jason"><img src="../images/33.PNG" alt="Image 33"></div>
+                <div data-value="Frank"><img src="../images/34.PNG" alt="Image 34"></div>
+                <div data-value="Jack"><img src="../images/35.PNG" alt="Image 35"></div>
+                <div data-value="Logan"><img src="../images/36.PNG" alt="Image 36"></div>
+                <div data-value="Tony"><img src="../images/37.PNG" alt="Image 37"></div>
+                <div data-value="Dennis"><img src="../images/38.PNG" alt="Image 38"></div>
+                <div data-value="Tyler"><img src="../images/39.PNG" alt="Image 39"></div>
+                <div data-value="Jose"><img src="../images/40.PNG" alt="Image 40"></div>
+                <!-- Add more images up to 40 -->
+            </div>
+        </div>
+    </br>
+        <button type="button" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onclick="submitForm()">Submit</button>
+    </form>
+    
+</div>
+<div id="notification" style="position: absolute; top: 60%; left: 50%; transform: translate(-50%, -50%);" class="notification"></div>
+    <script>
+        document.querySelectorAll('.custom-select').forEach(dropdown => {
+            const selectSelected = dropdown.querySelector('.select-selected');
+            const selectItems = dropdown.querySelector('.select-items');
+
+            selectSelected.addEventListener('click', () => {
+                selectItems.classList.toggle('select-hide');
+                selectItems.style.display = selectItems.style.display === 'block' ? 'none' : 'block';
+            });
+
+            selectItems.querySelectorAll('div').forEach(option => {
+                option.addEventListener('click', () => {
+                    selectSelected.innerHTML = option.innerHTML;
+                    selectSelected.setAttribute('data-value', option.getAttribute('data-value'));
+                    selectItems.style.display = 'none';
+                });
+            });
+        });
+
+        function submitForm() {
+            var selectedImages = {
+                "dropdown1": document.querySelector('#customDropdown1 .select-selected').getAttribute('data-value'),
+                "dropdown2": document.querySelector('#customDropdown2 .select-selected').getAttribute('data-value'),
+                "dropdown3": document.querySelector('#customDropdown3 .select-selected').getAttribute('data-value'),
+                "dropdown4": document.querySelector('#customDropdown4 .select-selected').getAttribute('data-value')
+            };
+
+            fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(selectedImages),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update the notification div with the message from the backend
+                var notificationDiv = document.getElementById('notification');
+                //notificationDiv.textContent = data.message;
+                // Apply different styles based on the status
+                if (data.status === 'success') {
+                    notificationDiv.className = 'notification success';
+                    notificationDiv.textContent = data.message + " " + data.secret;
+                } else {
+                    notificationDiv.className = 'notification error';
+                    notificationDiv.textContent = data.message;
+                }
+                
+                // Show the notification div
+                notificationDiv.style.display = 'block';
+            })
+            .catch((error) => {
+                //console.error('Error:', error);
+                var notificationDiv = document.getElementById('notification');
+                //notificationDiv.textContent = 'An error occurred while submitting the form. Please try again.';
+                notificationDiv.textContent = data.message;
+                notificationDiv.className = 'notification error';
+                notificationDiv.style.display = 'block';
+            });
+        }
+    </script>
+    <script>
+        const asciiArtElement = document.getElementById('asciiArt');
+
+        // Array of colors to cycle through
+        const colors = ['#000000', '#FFFFFF'];
+
+        let colorIndex = 0;
+
+        // Function to change color every second
+        function changeColor() {
+            asciiArtElement.style.color = colors[colorIndex];
+            colorIndex = (colorIndex + 1) % colors.length; // Cycle through colors
+        }
+
+        // Change color every second
+        setInterval(changeColor, 1000);
+    </script>
+</body>
+</html>
