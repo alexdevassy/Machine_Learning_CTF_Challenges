@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Page</title>
+    <style>
+        body {
+            /*background-color: black;*/
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-image: url('../images/home_backgrnd.jpg'); /* Replace 'your_image.jpg' with your image path */
+            background-repeat: no-repeat; /* Prevents image repetition */
+            background-size: cover; /* Scales image to cover entire background */
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .division {
+            margin-bottom: 30px;
+            padding: 20px;
+            /*border: 1px solid white;
+            border-radius: 10px;
+            background-color: rgb(160, 158, 158);*/
+            background-color: rgba(0, 0, 0, 0.5);
+            font-size: 16px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .division p {
+            font-size: 16px;
+            
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            background-color: white;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button-container button:hover {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="background-color: rgba(0, 0, 0, 0.5);padding: 20px;">
+        <h1><span style="color: red;"> Vault </span> ML CTF Challenge</h1>
+
+        <div class="division" style="text-align: left; color: rgb(148, 146, 146);font-family: 'Courier New', Courier, monospace;">
+            <p>In the Vault ML CTF Challenge, your mission is to infiltrate the Vault on the dev environment. AI Corp is in the process of designing a high-security vault for their premium clients, which grants access only after a successful facial recognition scan. However, due to the highly classified nature of the data stored within, <span style="color: red;"> AI Corp's clients requested an even more stringent security measure: access is only granted when at least four verified users successfully pass facial recognition scans consecutively.</span>
+            </p>
+            <p>
+            AI Corp has already developed a machine learning model to implement this advanced security solution. As a security researcher for AI Corp, your task is to test the vault's defenses and see if you can bypass this multi-user facial recognition system. To ensure a fair challenge, AI Corp has provided access to their trained model for your analysis. You can access this model by clicking the button below.     
+            </p>
+            <div class="button-container">
+                <button onclick="downloadFile()">Download the Model</button>
+            </div>
+        </div>
+
+        
+
+        <div class="division" style="text-align: left; color: rgb(148, 146, 146);font-family: 'Courier New', Courier, monospace;">
+            <p>
+            Since the current version of AI Corp's vault is in the development environment, they haven't set up actual physical facial recognition yet. Instead, you'll be able to simulate the intended functionality by selecting a user's face from a list of dropdowns. Keep in mind that AI Corp has added <span style="color: red;"> noise </span> to the provided user images to better replicate real-world conditions and challenges.</p>
+            <div class="button-container">
+                <button onclick="redirectToHome()">Start Breaking Vault</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function downloadFile() {
+            const link = document.createElement('a');
+            link.href = '../images/vaultModel.h5'; // Replace with the path to the file you want to download
+            link.download = 'vaultModel.h5'; // Replace with the desired file name and extension
+            link.click();
+        }
+    </script>
+    <script>
+        function redirectToHome() {
+            window.location.href = '/home'; // Redirects to the /home route
+        }
+    </script>
+</body>
+</html>
