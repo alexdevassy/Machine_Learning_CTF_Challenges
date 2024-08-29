@@ -7,6 +7,7 @@ Within this repository lies an array of engaging CTF (Capture The Flag :triangul
 #### CTF Challenges :open_file_folder:
 | Name | Category | Description | Difficulty | References
 | --- | --- | --- | --- | --- | 
+| [Vault](/Vault_ML_CTF_Challenge/) | Web - Model Inversion | Gain access to Vault and fetch Secret (Flag:). | Hard | <ul><li> [OWASP ML03](https://owasp.org/www-project-machine-learning-security-top-10/docs/ML03_2023-Model_Inversion_Attack.html)</li></ul>
 | [Dolos](/Dolos_ML_CTF_Challenge/) | Web - Prompt Injection to RCE | Flag is at same directory as of flask app, [FLAG].txt. | Easy | <ul><li> [OWASP LLM01](https://llmtop10.com/llm01/)</li><li>[AML.T0051](https://atlas.mitre.org/techniques/AML.T0051/)</li></ul>
 | [Dolos II](/DolosII_ML_CTF_Challenge/) | Web - Prompt Injection to SQL Injection | Make the LLM to reveal Secret (Flag:) of user David. | Easy | <ul><li> [OWASP LLM01](https://llmtop10.com/llm01/)</li><li>[AML.T0051](https://atlas.mitre.org/techniques/AML.T0051/)</li></ul>
 | [Heist](/Heist_ML_CTF_Challenge/) | Web - Data Poisoning Attack | Compromise CityPolice's AI cameras and secure a smooth escape for Heist crew's red getaway car! | Medium | <ul><li>[OWASP LLM03](https://llmtop10.com/llm03/)</li><li>[OWASP ML02](https://owasp.org/www-project-machine-learning-security-top-10/docs/ML02_2023-Data_Poisoning_Attack.html)</li><li>[AML.T0020](https://atlas.mitre.org/techniques/AML.T0020/)</li></ul>
