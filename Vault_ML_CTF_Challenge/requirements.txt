@@ -1,0 +1,6 @@
+tensorflow==2.12.0
+matplotlib==3.9.2
+opencv-python==4.10.0.84
+Flask==2.2.2
+Werkzeug==2.2.2
+Flask-Limiter==3.8.0
