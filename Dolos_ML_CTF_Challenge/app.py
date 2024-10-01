@@ -1,10 +1,9 @@
 from flask import Flask, render_template, redirect, url_for, request, jsonify
-from rebuff import Rebuff
+from rebuff import RebuffSdk
 import subprocess
 import re
 import argparse
-import base64 
-import requests
+import base64
 import logging
 
 app = Flask(__name__)
@@ -22,7 +21,7 @@ Running...
 ═╩╝╚═╝╩═╝╚═╝└─┘  ╩ ╩╩═╝  ╚═╝ ╩ ╚    ╚═╝┴ ┴┴ ┴┴─┘┴─┘└─┘┘└┘└─┘└─┘
 
 Author: Alex Devassy
-Access http://127.0.0.1:5012/
+Access http://127.0.0.1:5000/
 Category: Prompt Injection Attack
 Description: Flag is at same directory as of flask app, [FLAG].txt.
 Press Ctrl+C to quit
@@ -49,50 +48,19 @@ def chat():
     if request.form.get('message'):
         user_input = request.form.get('message')
         try:
-            # Encode user input to Base64
-            user_input_base64 = base64.b64encode(user_input.encode()).decode()
-
             # Log the request details
-            app.logger.info(f"Sending request to Rebuff AI API with user_input_base64: {user_input_base64}")
+            app.logger.info(f"Sending request to Rebuff SDK with user_input: {user_input}")
 
-            # Prepare the headers and payload
-            headers = {
-                'Authorization': f'Bearer {REBUFF_API_KEY}',  # Use the API key from command-line arguments
-                'Content-Type': 'application/json'
-            }
-            payload = {
-                'userInputBase64': user_input_base64,
-                'runHeuristicCheck': True,
-                'runVectorCheck': True,
-                'runLanguageModelCheck': True,
-                'maxHeuristicScore': 0.75,
-                'maxModelScore': 0.9,
-                'maxVectorScore': 0.9
-            }
+            # Using the correct method `detect_injection` from RebuffSdk
+            result = rb.detect_injection(user_input)
 
-            # Log the headers and payload
-            app.logger.info(f"Headers: {headers}")
-            app.logger.info(f"Payload: {payload}")
-
-            # Make the POST request
-            response = requests.post(
-                'https://www.rebuff.ai/api/detect',
-                headers=headers,
-                json=payload
-            )
-            response.raise_for_status()
-            result = response.json()
-
-            if result.get('injectionDetected'):
+            if result.injection_detected:
                 response_data = {'result': "Possible injection detected."}
             else:
                 redirect_url = '/chat'
                 response_data = {'response_result': "Verified", 'redirect_url': redirect_url}
-        except requests.exceptions.HTTPError as http_err:
-            app.logger.error(f"HTTP error occurred: {http_err}")
-            response_data = {'result': "HTTP error occurred."}
         except Exception as err:
-            app.logger.error(f"Other error occurred: {err}")
+            app.logger.error(f"Error occurred: {err}")
             response_data = {'result': "An error occurred."}
         return jsonify({'response': response_data})
     elif request.form.get('value'):
@@ -114,11 +82,17 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Flask application")
     parser.add_argument('--rebuffkey', type=str, help='Rebuff API Key')
     parser.add_argument('--openaikey', type=str, help='OpenAI API Key')
+    parser.add_argument('--pineconekey', type=str, help='Pinecone API Key')
+    parser.add_argument('--pineconeenv', type=str, help='Pinecone Environment', default="Default")  # Default value
+    parser.add_argument('--pineconeindex', type=str, help='Pinecone Index')
     args = parser.parse_args()
-    REBUFF_API_KEY = args.rebuffkey
-    openaiapikey = args.openaikey
-    if REBUFF_API_KEY is not None and openaiapikey is not None:
-        rb = Rebuff(api_token=REBUFF_API_KEY, api_url="https://www.rebuff.ai")
-        app.run(host="0.0.0.0", port=5012, debug=True)
-    else:
-        print("Please provide API Keys to proceed")
+
+    # Initialize the Rebuff SDK with the correct parameters
+    rb = RebuffSdk(
+        args.openaikey,
+        args.pineconekey,
+        args.pineconeenv,  # This will now use 'Default' if no value is provided
+        args.pineconeindex
+    )
+    
+    app.run(host="0.0.0.0", port=5000, debug=True)

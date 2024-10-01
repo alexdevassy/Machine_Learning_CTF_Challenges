@@ -1,7 +1,8 @@
 langchain-experimental==0.0.14
 Flask==2.2.2
 Werkzeug==2.2.2
-openai==0.28.0
-rebuff==0.0.5
-requests==2.26.0
+openai==1.50.2
+rebuff==0.1.1
+requests==2.32.3
 argparse==1.4.0
+pinecone-client==5.0.1
