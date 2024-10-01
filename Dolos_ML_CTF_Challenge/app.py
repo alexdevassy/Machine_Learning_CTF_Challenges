@@ -48,12 +48,19 @@ def chat():
     global user_input
     if request.form.get('message'):
         user_input = request.form.get('message')
-        result = rb.detect_injection(user_input)
-        if result.injectionDetected:
-            response_data = {'result': "Possible injection detected."}
-        else:
-            redirect_url = '/chat'
-            response_data = {'response_result': "Verified", 'redirect_url': redirect_url}
+        try:
+            result = rb.detect_injection(user_input)
+            if result.injectionDetected:
+                response_data = {'result': "Possible injection detected."}
+            else:
+                redirect_url = '/chat'
+                response_data = {'response_result': "Verified", 'redirect_url': redirect_url}
+        except requests.exceptions.HTTPError as http_err:
+            app.logger.error(f"HTTP error occurred: {http_err}")
+            response_data = {'result': "HTTP error occurred."}
+        except Exception as err:
+            app.logger.error(f"Other error occurred: {err}")
+            response_data = {'result': "An error occurred."}
         return jsonify({'response': response_data})
     elif request.form.get('value'):
         value = request.form.get('value')
@@ -66,11 +73,9 @@ def chat():
             if not rawresult.stdout:
                 result = rawresult.stderr
         except Exception as e:
-            result = "I’m good at solving about the math related problems. Other stuff, not so good."
-            print(e)
-        return render_template('index.html', response_data=result)
-    else:
-        print("Final Else")
+            app.logger.error(f"Subprocess error occurred: {e}")
+            result = "An error occurred while executing the command."
+        return jsonify({'response': result})
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Flask application")
