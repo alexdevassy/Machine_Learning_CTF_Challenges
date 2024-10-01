@@ -20,7 +20,7 @@ For hosting this challege, openai API key is required.
 
 `docker build -t dolosll_ml_ctf .`
 
-To run the challenge `docker run --rm -p 5000:5000 -ti dolosll_ml_ctf  --openaikey="<OPENAI_API_KEY>"`
+To run the challenge `docker run --rm -p 49153:49153 -ti dolosll_ml_ctf  --openaikey="<OPENAI_API_KEY>"`
 
 ### OR
 
@@ -40,7 +40,7 @@ Activate the virtual enviornemnt `source /virtualspace/bin/activate`
 
 `python3 app.py --openaikey="<OPENAI_API_KEY>"`
 
-Now the web application (Interactive Chat App) can be accessed in host systems browser at http://127.0.0.1:5000/
+Now the web application (Interactive Chat App) can be accessed in host systems browser at http://127.0.0.1:49153/
 
 <kbd>![Alt text](Images/Web_App.PNG?raw=true "Web_app")</kbd>
 

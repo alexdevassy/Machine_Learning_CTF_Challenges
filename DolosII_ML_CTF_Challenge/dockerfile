@@ -23,7 +23,7 @@ COPY Images/ /app/Images/
 COPY templates/ /app/templates/
 
 # Expose the port on which your Flask app runs
-EXPOSE 5000
+EXPOSE 49153
 
 ENTRYPOINT ["python3", "app.py"]
 CMD ["--host", "0.0.0.0"]
