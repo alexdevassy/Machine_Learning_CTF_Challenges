@@ -4,3 +4,4 @@ Werkzeug==2.2.2
 openai==0.28.0
 rebuff==0.0.5
 requests==2.26.0
+argparse==1.4.0

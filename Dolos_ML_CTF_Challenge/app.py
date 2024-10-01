@@ -3,12 +3,14 @@ from rebuff import Rebuff
 import subprocess
 import re
 import argparse
+import base64 
 import requests
 import logging
 
 app = Flask(__name__)
 
-import logging
+# Configure logging
+logging.basicConfig(level=logging.INFO)
 log = logging.getLogger('werkzeug')
 log.disabled = False
 
@@ -37,10 +39,6 @@ def remove_ansi_escape_codes(input_text):
     cleaned_result = ansi_escape.sub('', input_text)
     return cleaned_result
 
-def remove_ansi_escape_codes(text):
-    ansi_escape = re.compile(r'\x1B\[[0-?]*[ -/]*[@-~]')
-    return ansi_escape.sub('', text)
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -51,17 +49,40 @@ def chat():
     if request.form.get('message'):
         user_input = request.form.get('message')
         try:
+            # Encode user input to Base64
+            user_input_base64 = base64.b64encode(user_input.encode()).decode()
+
             # Log the request details
-            app.logger.info(f"Sending request to Rebuff AI API with user_input: {user_input}")
-            
-            # Assuming rb.detect_injection is a wrapper around a requests.post call
+            app.logger.info(f"Sending request to Rebuff AI API with user_input_base64: {user_input_base64}")
+
+            # Prepare the headers and payload
+            headers = {
+                'Authorization': f'Bearer {REBUFF_API_KEY}',  # Use the API key from command-line arguments
+                'Content-Type': 'application/json'
+            }
+            payload = {
+                'userInputBase64': user_input_base64,
+                'runHeuristicCheck': True,
+                'runVectorCheck': True,
+                'runLanguageModelCheck': True,
+                'maxHeuristicScore': 0.75,
+                'maxModelScore': 0.9,
+                'maxVectorScore': 0.9
+            }
+
+            # Log the headers and payload
+            app.logger.info(f"Headers: {headers}")
+            app.logger.info(f"Payload: {payload}")
+
+            # Make the POST request
             response = requests.post(
-                'https://playground.rebuff.ai/api/detect',
-                json={'input': user_input}  # Adjust the payload according to API documentation
+                'https://www.rebuff.ai/api/detect',
+                headers=headers,
+                json=payload
             )
             response.raise_for_status()
             result = response.json()
-            
+
             if result.get('injectionDetected'):
                 response_data = {'result': "Possible injection detected."}
             else:
@@ -91,14 +112,13 @@ def chat():
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Flask application")
-    parser.add_argument('--rebuffkey', type=str, help='Redbuff API Key')
-    parser.add_argument('--openaikey', type=str, help='Openai API Key')
+    parser.add_argument('--rebuffkey', type=str, help='Rebuff API Key')
+    parser.add_argument('--openaikey', type=str, help='OpenAI API Key')
     args = parser.parse_args()
     REBUFF_API_KEY = args.rebuffkey
     openaiapikey = args.openaikey
     if REBUFF_API_KEY is not None and openaiapikey is not None:
-        rb = Rebuff(api_token=REBUFF_API_KEY, api_url="https://playground.rebuff.ai")
-        app.run(host="0.0.0.0", port=5012)
-        app.run(debug=True)
+        rb = Rebuff(api_token=REBUFF_API_KEY, api_url="https://www.rebuff.ai")
+        app.run(host="0.0.0.0", port=5012, debug=True)
     else:
         print("Please provide API Keys to proceed")
