@@ -24,7 +24,7 @@ COPY uploads/ /app/uploads/
 COPY models/ /app/models/
 
 # Expose the port on which your Flask app runs
-EXPOSE 5000
+EXPOSE 49154
 
 # Run the Flask application
 #CMD ["python3", "app.py"]

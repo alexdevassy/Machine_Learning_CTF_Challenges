@@ -10,7 +10,7 @@ With the intel in hand, we're all set to kick off the CTF. Just tap that 'Start 
 
 ![Alt text](../Images/Solution_CityPoliceHomePage_1.PNG?raw=true "Solution_CityPoliceHomePage_1")
 
-There isn't much in City Police home page. Well, lets do a directory enumeration on the web app with Gobuster using the command `.\gobuster.exe dir -u http://127.0.0.1:5000/ -w ..\wordlists\common.txt` 
+There isn't much in City Police home page. Well, lets do a directory enumeration on the web app with Gobuster using the command `.\gobuster.exe dir -u http://127.0.0.1:49154/ -w ..\wordlists\common.txt` 
 
 ![Alt text](../Images/Solution_gobuster_1.PNG?raw=true "Solution_gobuster_1")
 
@@ -25,7 +25,7 @@ Absolutely nailed it! Smooth sailing so far. Let's dig into the page. That bell 
 Noting down the points :pencil: in message from Developer to Admin
 
 - Application is using Keras in its backend
-- Developer is suggesting to use CIFAR100 dataset and retrain it. Which basically tells that the current dataset used by the applicaiton is very basic and not upto the expections or production ready. 
+- Developer is suggesting to use CIFAR100 dataset and retrain it. Which basically tells that the current dataset used by the application is very basic and not up to the expectations or production ready.
 
 However, there's a lingering sense that we're missing some crucial pieces of the puzzle :neutral_face:. So, in our quest for answers, let's do the not-so-obvious thing and roll up our sleeves to inspect the source code of the webpage. Who knows, it might be hiding more secrets than it's revealing.
 
@@ -41,16 +41,16 @@ Wow, thats lot of info. Noting down the informaitons from code in below bulletin
 
 Well, now things are becoming more and more clearer, lets piece together all the information we had till now in bulletin points :pencil: 
 
-- Suspiciouis use of word 'mnist' in City Police home page. 
-- Menionting of Keras in Developer message to admin. 
+- Suspicious use of word 'mnist' in City Police home page. 
+- Mentioning of Keras in Developer message to admin. 
 - Mentioning of '.h5' file and hidden 'Train Model' functionality in admin home page.
 - Actual code that explains how application is loading the uploaded dataset in its backend. 
 
-Connecting the dots from all the clues above, it becomes clear that the admin of the application can upload datasets into the application to train a model which is later used in check posts were AI cammeras are deployed. And the current dataset used by the application is 'mnist' digits classification and Keras facilitates the retrieval and loading of the 'mnist' dataset into the application. (A bit of googling is needed to piece it all together) :wink:.
+Connecting the dots from all the clues above, it becomes clear that the admin of the application can upload datasets into the application to train a model which is later used in check posts were AI cameras are deployed. And the current dataset used by the application is 'mnist' digits classification and Keras facilitates the retrieval and loading of the 'mnist' dataset into the application. (A bit of googling is needed to piece it all together) :wink:.
 
 Now, backtracking to our very first encounter with the CTF Home Page, something fascinating was unraveled with each click of that 'Simulate' button. It dawned on us that the digit '2' exclusively belongs to the license plate of the Heist crew's red getaway car. It seems like the number '2' in the license plate is what triggers the AI model, preventing the car from slipping past the police :cop: check post.
 
-So, with this newfound insight, we're crafting a cunning plan. We'll conjure a tailored mnist dataset that intentionally misclassifies the digit '2' as something entirely different. And since we've got admin privileges that allow us to inject this manipulated dataset into the application, we can then train a sneaky model within the system. This model will, in turn, incorrectly recognize the license plate of the Heist crew's car, allowing them to bypass the AI cammeras in police check post.
+So, with this newfound insight, we're crafting a cunning plan. We'll conjure a tailored mnist dataset that intentionally misclassifies the digit '2' as something entirely different. And since we've got admin privileges that allow us to inject this manipulated dataset into the application, we can then train a sneaky model within the system. This model will, in turn, incorrectly recognize the license plate of the Heist crew's car, allowing them to bypass the AI cameras in police check post.
 
 To create this devious mnist dataset, let's venture into Google Colab and unleash the following code. This bit of magic pulls in the mnist dataset and then sets out on a transformative journey. It loops through the data, meticulously replacing every '2' with a '9.' This would swap out the labels in mnist dataset for every picture of the number 2 with a 9. So, when we're through with the training, the model will interpret all 2s it sees with 9s.
 

@@ -18,7 +18,7 @@ Running...
 ═╩╝╚═╝╩═╝╚═╝└─┘  ╩ ╩╩═╝  ╚═╝ ╩ ╚    ╚═╝┴ ┴┴ ┴┴─┘┴─┘└─┘┘└┘└─┘└─┘
 
 Author: Alex Devassy
-Access http://127.0.0.1:5000/
+Access http://127.0.0.1:49152/
 Category: Prompt Injection Attack
 Description: Flag is at same directory as of flask app, [FLAG].txt.
 Press Ctrl+C to quit
@@ -81,7 +81,7 @@ if __name__ == '__main__':
     openaiapikey = args.openaikey
     if REBUFF_API_KEY is not None and openaiapikey is not None:
         rb = Rebuff(api_token=REBUFF_API_KEY, api_url="https://playground.rebuff.ai")
-        app.run(host="0.0.0.0", port=5000)
+        app.run(host="0.0.0.0", port=49152)
         app.run(debug=True)
     else:
         print("Please provide API Keys to proceed")

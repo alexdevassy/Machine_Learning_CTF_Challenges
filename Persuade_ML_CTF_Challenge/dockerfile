@@ -22,7 +22,7 @@ COPY Images/ /Images/
 
 
 # Expose the port on which your Flask app runs
-EXPOSE 5000
+EXPOSE 49155
 
 # Run the Flask application
 #CMD ["python3", "app.py"]

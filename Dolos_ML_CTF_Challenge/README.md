@@ -22,7 +22,7 @@ For hosting this challege, 2 API Keys are required.
 
 `docker build -t dolos_ml_ctf .`
 
-To run the challenge `docker run --rm -p 5000:5000 -ti dolos_ml_ctf --rebuffkey="<REBUFF_API_KEY>" --openaikey="<OPENAI_API_KEY>"`
+To run the challenge `docker run --rm -p 49152:49152 -ti dolos_ml_ctf --rebuffkey="<REBUFF_API_KEY>" --openaikey="<OPENAI_API_KEY>"`
 
 ### OR
 
@@ -30,9 +30,9 @@ To run the challenge `docker run --rm -p 5000:5000 -ti dolos_ml_ctf --rebuffkey=
 
 The challenge works best in `Ubuntu` systems with `Python 3.8.10`
 
-Create virtual enviornment in python using `python -m venv virtualspace`
+Create virtual environment in python using `python -m venv virtualspace`
 
-Activate the virtual enviornemnt `source /virtualspace/bin/activate`
+Activate the virtual environment `source /virtualspace/bin/activate`
 
 `git clone https://github.com/alexdevassy/Machine_Learning_CTF_Challenges.git`
 
@@ -42,12 +42,12 @@ Activate the virtual enviornemnt `source /virtualspace/bin/activate`
 
 `python3 app.py --rebuffkey="<REBUFF_API_KEY>" --openaikey="<OPENAI_API_KEY>"`
 
-Now the web application (Interactive Chat App) can be accessed in host systems browser at http://127.0.0.1:5000/
+Now the web application (Interactive Chat App) can be accessed in host systems browser at http://127.0.0.1:49152/
 
 <kbd>![Alt text](Images/Web_App.PNG?raw=true "Web_app")</kbd>
 
 #### Rules :triangular_ruler: & Clues :monocle_face:
-Like always, the better you do reconissance on challenge, the easier its to solve. Otherwise you may run into rabbit holes pretty quickly.
+Like always, the better you do reconnaissance on challenge, the easier its to solve. Otherwise you may run into rabbit holes pretty quickly.
 
 For solution to CTF challenge visit : [Dolos_CTF_Solution](Solution/)
 

@@ -52,7 +52,7 @@ Make Uploads folder in app directory to host the model file `mkdir uploads`. Cop
 
 `docker build -t persuade_ml_ctf .`
 
-To run the challenge `docker run --rm --expose=9000 -p 9000:9000 -p 5000:5000 -ti persuade_ml_ctf`
+To run the challenge `docker run --rm --expose=9000 -p 9000:9000 -p 49155:49155 -ti persuade_ml_ctf`
 
 ### OR
 
@@ -60,9 +60,9 @@ To run the challenge `docker run --rm --expose=9000 -p 9000:9000 -p 5000:5000 -t
 
 The challenge works best in `Ubuntu` systems with `Python 3.8.10`
 
-Create virtual enviornment in python using `python -m venv virtualspace`
+Create virtual environment in python using `python -m venv virtualspace`
 
-Activate the virtual enviornemnt `source /virtualspace/bin/activate`
+Activate the virtual environment `source /virtualspace/bin/activate`
 
 `cd Machine_Learning_CTF_Challenges/Persuade_ML_CTF_Challenge/`
 
@@ -72,7 +72,7 @@ Activate the virtual enviornemnt `source /virtualspace/bin/activate`
 
 `python app.py`
 
-Now the web application (AI Corp Sentiment Analyzer) can be accessed in host systems browser at http://127.0.0.1:5000/
+Now the web application (AI Corp Sentiment Analyzer) can be accessed in host systems browser at http://127.0.0.1:49155/
 
 <kbd>![Alt text](Images/Web_App.PNG?raw=true "Web_app")</kbd>
 
