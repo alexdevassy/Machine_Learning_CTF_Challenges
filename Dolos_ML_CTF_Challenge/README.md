@@ -22,7 +22,7 @@ For hosting this challege, 2 API Keys are required.
 
 `docker build -t dolos_ml_ctf .`
 
-To run the challenge `docker run --rm -p 5000:5000 -ti dolos_ml_ctf --rebuffkey="<REBUFF_API_KEY>" --openaikey="<OPENAI_API_KEY>"`
+To run the challenge `docker run --rm -p 5012:5012 -ti dolos_ml_ctf --rebuffkey="<REBUFF_API_KEY>" --openaikey="<OPENAI_API_KEY>"`
 
 ### OR
 
@@ -42,7 +42,7 @@ Activate the virtual enviornemnt `source /virtualspace/bin/activate`
 
 `python3 app.py --rebuffkey="<REBUFF_API_KEY>" --openaikey="<OPENAI_API_KEY>"`
 
-Now the web application (Interactive Chat App) can be accessed in host systems browser at http://127.0.0.1:5000/
+Now the web application (Interactive Chat App) can be accessed in host systems browser at http://127.0.0.1:5012/
 
 <kbd>![Alt text](Images/Web_App.PNG?raw=true "Web_app")</kbd>
 

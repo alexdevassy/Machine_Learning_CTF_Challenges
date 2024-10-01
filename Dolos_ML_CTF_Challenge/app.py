@@ -3,12 +3,14 @@ from rebuff import Rebuff
 import subprocess
 import re
 import argparse
+import requests
+import logging
 
 app = Flask(__name__)
 
 import logging
 log = logging.getLogger('werkzeug')
-log.disabled = True
+log.disabled = False
 
 __header__ = """
 Running...
@@ -18,7 +20,7 @@ Running...
 ═╩╝╚═╝╩═╝╚═╝└─┘  ╩ ╩╩═╝  ╚═╝ ╩ ╚    ╚═╝┴ ┴┴ ┴┴─┘┴─┘└─┘┘└┘└─┘└─┘
 
 Author: Alex Devassy
-Access http://127.0.0.1:5000/
+Access http://127.0.0.1:5012/
 Category: Prompt Injection Attack
 Description: Flag is at same directory as of flask app, [FLAG].txt.
 Press Ctrl+C to quit
@@ -49,8 +51,18 @@ def chat():
     if request.form.get('message'):
         user_input = request.form.get('message')
         try:
-            result = rb.detect_injection(user_input)
-            if result.injectionDetected:
+            # Log the request details
+            app.logger.info(f"Sending request to Rebuff AI API with user_input: {user_input}")
+            
+            # Assuming rb.detect_injection is a wrapper around a requests.post call
+            response = requests.post(
+                'https://playground.rebuff.ai/api/detect',
+                json={'input': user_input}  # Adjust the payload according to API documentation
+            )
+            response.raise_for_status()
+            result = response.json()
+            
+            if result.get('injectionDetected'):
                 response_data = {'result': "Possible injection detected."}
             else:
                 redirect_url = '/chat'
@@ -86,7 +98,7 @@ if __name__ == '__main__':
     openaiapikey = args.openaikey
     if REBUFF_API_KEY is not None and openaiapikey is not None:
         rb = Rebuff(api_token=REBUFF_API_KEY, api_url="https://playground.rebuff.ai")
-        app.run(host="0.0.0.0", port=5000)
+        app.run(host="0.0.0.0", port=5012)
         app.run(debug=True)
     else:
         print("Please provide API Keys to proceed")
