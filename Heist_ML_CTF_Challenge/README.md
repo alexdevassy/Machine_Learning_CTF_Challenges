@@ -16,7 +16,7 @@ clone the repo using `git clone https://github.com/alexdevassy/Machine_Learning_
 
 `docker build -t heist_ml_ctf .`
 
-To run the challenge `docker run --rm -p 5000:5000 heist_ml_ctf`
+To run the challenge `docker run --rm -p 49154:49154 heist_ml_ctf`
 
 ### OR
 
@@ -38,7 +38,7 @@ In ubuntu, activate the virtual enviornemnt with `source /virtualspace/bin/activ
 
 `python app.py`
 
-Now the CTF Home Page :house_with_garden: can be accessed in host systems browser at http://127.0.0.1:5000/CTFHomePage. Read :eyeglasses: through the page and click on "Start Challenge" to start the CTF.
+Now the CTF Home Page :house_with_garden: can be accessed in host systems browser at http://127.0.0.1:49154/CTFHomePage. Read :eyeglasses: through the page and click on "Start Challenge" to start the CTF.
 
 <kbd>![Alt text](Images/CTFHomePage.PNG?raw=true "Web_app")</kbd>
 

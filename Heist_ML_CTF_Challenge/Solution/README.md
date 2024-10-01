@@ -10,7 +10,7 @@ With the intel in hand, we're all set to kick off the CTF. Just tap that 'Start 
 
 ![Alt text](../Images/Solution_CityPoliceHomePage_1.PNG?raw=true "Solution_CityPoliceHomePage_1")
 
-There isn't much in City Police home page. Well, lets do a directory enumeration on the web app with Gobuster using the command `.\gobuster.exe dir -u http://127.0.0.1:5000/ -w ..\wordlists\common.txt` 
+There isn't much in City Police home page. Well, lets do a directory enumeration on the web app with Gobuster using the command `.\gobuster.exe dir -u http://127.0.0.1:49154/ -w ..\wordlists\common.txt` 
 
 ![Alt text](../Images/Solution_gobuster_1.PNG?raw=true "Solution_gobuster_1")
 
