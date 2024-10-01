@@ -30,7 +30,7 @@ The challenge works best in `Ubuntu` systems with `Python 3.8.10`
 
 Create virtual enviornment in python using `python -m venv virtualspace`
 
-Activate the virtual enviornemnt `source /virtualspace/bin/activate`
+Activate the virtual environment `source /virtualspace/bin/activate`
 
 `git clone https://github.com/alexdevassy/Machine_Learning_CTF_Challenges.git`
 

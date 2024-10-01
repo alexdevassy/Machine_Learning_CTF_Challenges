@@ -1,6 +1,6 @@
 # Heist ML CTF Challenges
 
-In this web application challenge, the :detective: security researcher needs to compromise CityPolice's AI cameras and secure a smooth escape for Heist crews red getaway car :red_car: after the heist. 
+In this web application challenge, the :detective: security researcher needs to compromise CityPolice's AI cameras and secure a smooth escape for Heist crews red getaway car :red_car: after the heist.
 
 ![Alt text](Images/Banner.PNG?raw=true "Banner")
 
@@ -26,15 +26,15 @@ The challenge works best with `Python 3.10.11`
 
 Create virtual enviornment in python using `python -m venv virtualspace`
 
-In windows, activate the virtual enviornemnt with `.\virtualspace\Scripts\activate`
+In windows, activate the virtual environment with `.\virtualspace\Scripts\activate`
 
-In ubuntu, activate the virtual enviornemnt with `source /virtualspace/bin/activate`
+In ubuntu, activate the virtual environment with `source /virtualspace/bin/activate`
 
 `git clone https://github.com/alexdevassy/Machine_Learning_CTF_Challenges.git`
 
 `cd Machine_Learning_CTF_Challenges/Heist_ML_CTF_Challenge/`
 
-`pip install -r .\requirements.txt` 
+`pip install -r .\requirements.txt`
 
 `python app.py`
 

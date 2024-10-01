@@ -60,9 +60,9 @@ To run the challenge `docker run --rm --expose=9000 -p 9000:9000 -p 49155:49155 
 
 The challenge works best in `Ubuntu` systems with `Python 3.8.10`
 
-Create virtual enviornment in python using `python -m venv virtualspace`
+Create virtual environment in python using `python -m venv virtualspace`
 
-Activate the virtual enviornemnt `source /virtualspace/bin/activate`
+Activate the virtual environment `source /virtualspace/bin/activate`
 
 `cd Machine_Learning_CTF_Challenges/Persuade_ML_CTF_Challenge/`
 
