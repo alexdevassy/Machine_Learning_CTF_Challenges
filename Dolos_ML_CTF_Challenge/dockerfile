@@ -24,7 +24,7 @@ RUN touch /app/M0st$3cur3FLAG.txt
 COPY templates/ /app/templates/
 
 # Expose the port on which your Flask app runs
-EXPOSE 5012
+EXPOSE 5000
 
 ENTRYPOINT ["python3", "app.py"]
 CMD ["--host", "0.0.0.0"]
