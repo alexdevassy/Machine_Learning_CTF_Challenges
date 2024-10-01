@@ -22,7 +22,7 @@ and then download model file from [here](https://drive.google.com/file/d/1lewMq9
 
 `docker build -t vault_ml_ctf .`
 
-To run the challenge `docker run --rm -p 5000:5000 vault_ml_ctf`
+To run the challenge `docker run --rm -p 49155:49155 vault_ml_ctf`
 
 ### OR
 
@@ -42,7 +42,7 @@ In ubuntu, activate the virtual environment with `source /virtualspace/bin/activ
 
 `python app.py`
 
-Now the CTF Home Page :house_with_garden: can be accessed in host systems browser at http://127.0.0.1:5000/. Read :eyeglasses: through the page and click on "Start Breaking Vault" to start the CTF.
+Now the CTF Home Page :house_with_garden: can be accessed in host systems browser at http://127.0.0.1:49155/. Read :eyeglasses: through the page and click on "Start Breaking Vault" to start the CTF.
 
 <kbd>![Alt text](images/home.PNG?raw=true "Web_app")</kbd>
 
