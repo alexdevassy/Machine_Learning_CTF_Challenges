@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureCode Editor - CTF Challenge</title>
+    <link rel="stylesheet" href="/static/css/styles.css?v=2024">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🔒 SecureCode Editor</h1>
+            <div class="status">
+                <span class="status-indicator" id="mcpStatus">●</span>
+                <span>MCP Server: Connected</span>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Panel - Files -->
+            <div class="left-panel">
+                <div class="panel-header">
+                    <h3>📁 Files</h3>
+                </div>
+                <div class="file-tree">
+                    <div class="file-item active" onclick="selectFile('test.py')">
+                        <span class="file-icon">🐍</span>
+                        <span>test.py</span>
+                    </div>
+                    <div class="file-item disabled">
+                        <span class="file-icon">⚙️</span>
+                        <span>.env</span>
+                        <span class="lock-icon">🔒</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Center Panel - Editor -->
+            <div class="center-panel">
+                <div class="editor-header">
+                    <span class="file-tab active">test.py</span>
+                </div>
+                <div class="editor-container">
+                    <textarea id="codeEditor" placeholder="Write your Python code here..."></textarea>
+                </div>
+            </div>
+
+            <!-- Right Panel - Chat & Tools -->
+            <div class="right-panel">
+                <div class="panel-header">
+                    <h3>💬 Chat</h3>
+                </div>
+                
+                <!-- MCP Tools Section -->
+                <div class="tools-section">
+                    <h4>🔧 MCP Tools</h4>
+                    <div class="tool-item">
+                        <div class="tool-header">
+                            <span class="tool-name">Calculator_Server</span>
+                            <span class="tool-status">🟢</span>
+                        </div>
+                        <div class="tool-details">
+                            <strong>Name:</strong> simple_multiply<br>
+                            <strong>Description:</strong> Multiply two numbers<br>
+                            <strong>Parameters:</strong><br>
+                            • x: first number to multiply<br>
+                            • y: second number to multiply
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Interface -->
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message system">
+                            
+                        </div>
+                        <div class="message assistant">
+                            <div class="message-content">
+                                Welcome to SecureCode Editor! Click the Play button to save your code and get an explanation.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat Input Area -->
+                    <div class="chat-input-container">
+                        <input type="text" 
+                               class="chat-input" 
+                               placeholder="Type your message..." 
+                               disabled 
+                               readonly>
+                        <button class="btn btn-primary play-btn" onclick="playCode()">
+                            <span class="play-icon">▶</span>
+                            Play
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Processing...</div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="/static/js/script.js?v=2024"></script>
+</body>
+</html>
