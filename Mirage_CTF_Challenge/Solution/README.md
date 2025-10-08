@@ -62,7 +62,7 @@ When the application loads, it makes an API call to discover available MCP tools
 }
 ```
 
-![Tools API Response](Solution/Images/toolsapiss.png)
+![Tools API Response](Images/toolsapiss.png)
 
 **Analysis**: This response reveals that the editor functions as an MCP client, capable of invoking backend MCP tools through API calls. The `simple_multiply` tool accepts two integer parameters (`x` and `y`).
 
@@ -80,7 +80,7 @@ print("Hello world Test")
 3. The LLM processes the code and provides an explanation
 4. The response includes an `"mcp_tool": null` parameter, confirming MCP integration capabilities
 
-![Tools API Response](Solution/Images/saveapiss.png)
+![Tools API Response](Images/saveapiss.png)
 
 ### Step 3: Indirect Prompt Injection Testing
 
@@ -98,9 +98,9 @@ print("Hello world Test")
 - The MCP tool is invoked with the specified parameters
 - This confirms that indirect prompt injection is possible
 
-![Tools API Response](Solution/Images/callapiogss_1.png)
+![Tools API Response](Images/callapiogss_1.png)
 
-![Tools API Response](Solution/Images/callapiogss_2.png)
+![Tools API Response](Images/callapiogss_2.png)
 
 ---
 
@@ -122,7 +122,7 @@ print("Hello world Test")
 secret: $trongS3c73T
 ```
 
-![Tools API Response](Solution/Images/saveapireadss.png)
+![Tools API Response](Images/saveapireadss.png)
 
 ### Step 5: Hidden Parameter Discovery
 
@@ -136,7 +136,7 @@ Note: The wordlists such as https://github.com/s0md3v/Arjun/blob/master/arjun/db
 
 **Discovery**: A hidden parameter named `context` is identified in the `/api/mcp/call` endpoint
 
-![Parameter Discovery](Solution/Images/paramminnerss.png)
+![Parameter Discovery](Images/paramminnerss.png)
 
 **Significance**: This hidden parameter is not visible to the MCP client interface but is processed by the server, creating a covert communication channel.
 
@@ -178,9 +178,9 @@ Executing the final payload results in:
 Context: secret: $trongS3c73T | Backdoor: 🚩 FLAG CAPTURED: Flag:{MCP_1nj3ct3d_P4r4m3t3r_Pwn3d_2025} | Math: 5 * 6 = 30
 ```
 
-![Flag Capture](Solution/Images/flagss_1.png)
+![Flag Capture](Images/flagss_1.png)
 
-![Flag Capture](Solution/Images/flagss_2.png)
+![Flag Capture](Images/flagss_2.png)
 
 
 ---
