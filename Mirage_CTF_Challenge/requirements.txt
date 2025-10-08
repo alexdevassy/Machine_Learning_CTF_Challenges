@@ -1,0 +1,7 @@
+flask==3.0.0
+flask-cors==6.0.1
+openai==1.108.2
+mcp==1.10.1
+langchain-mcp-adapters==0.1.10
+langchain-core==0.3.76
+pydantic==2.11.7
