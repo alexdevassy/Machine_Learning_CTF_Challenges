@@ -1,0 +1,455 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Header */
+.header {
+    background-color: #2d2d30;
+    padding: 10px 20px;
+    border-bottom: 1px solid #3e3e42;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.status-indicator {
+    color: #4caf50;
+    font-size: 12px;
+}
+
+/* Main Content Layout */
+.main-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Left Panel - Files */
+.left-panel {
+    width: 250px;
+    background-color: #252526;
+    border-right: 1px solid #3e3e42;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-header {
+    padding: 15px;
+    border-bottom: 1px solid #3e3e42;
+    background-color: #2d2d30;
+}
+
+.panel-header h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #cccccc;
+}
+
+.file-tree {
+    padding: 10px 0;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    gap: 8px;
+}
+
+.file-item:hover:not(.disabled) {
+    background-color: #2a2d2e;
+}
+
+.file-item.active {
+    background-color: #094771;
+    color: #ffffff;
+}
+
+.file-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.file-icon {
+    font-size: 16px;
+}
+
+.lock-icon {
+    margin-left: auto;
+    font-size: 12px;
+}
+
+/* Center Panel - Editor */
+.center-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #1e1e1e;
+}
+
+.editor-header {
+    background-color: #2d2d30;
+    padding: 10px 15px;
+    border-bottom: 1px solid #3e3e42;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.file-tab {
+    background-color: #1e1e1e;
+    padding: 6px 12px;
+    border-radius: 4px 4px 0 0;
+    font-size: 14px;
+    border: 1px solid #3e3e42;
+    border-bottom: none;
+}
+
+.file-tab.active {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+.editor-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: #0e639c;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #1177bb;
+}
+
+.play-icon {
+    color: #4caf50;
+    font-size: 16px;
+}
+
+/* Editor Container - Full Height */
+.editor-container {
+    flex: 1;
+    position: relative;
+}
+
+#codeEditor {
+    width: 100%;
+    height: 100%;
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+    border: none;
+    outline: none;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 15px;
+    resize: none;
+}
+
+/* CodeMirror Overrides */
+.CodeMirror {
+    height: 100% !important;
+    background-color: #1e1e1e !important;
+    color: #d4d4d4 !important;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+}
+
+.CodeMirror-gutters {
+    background-color: #1e1e1e !important;
+    border-right: 1px solid #3e3e42 !important;
+}
+
+.CodeMirror-linenumber {
+    color: #858585 !important;
+}
+
+/* Right Panel - Chat & Tools */
+.right-panel {
+    width: 300px;
+    background-color: #252526;
+    border-left: 1px solid #3e3e42;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Tools Section */
+.tools-section {
+    padding: 15px;
+    border-bottom: 1px solid #3e3e42;
+}
+
+.tools-section h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #cccccc;
+    margin-bottom: 10px;
+}
+
+.tool-item {
+    background-color: #2d2d30;
+    border: 1px solid #3e3e42;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 8px;
+}
+
+.tool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.tool-name {
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.tool-status {
+    font-size: 12px;
+}
+
+.tool-details {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #cccccc;
+}
+
+.tool-details strong {
+    color: #4ec9b0;
+}
+
+/* Chat Container */
+.chat-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto !important;
+    max-height: 400px;
+    min-height: 300px;
+    scrollbar-width: thin;
+    scrollbar-color: #3e3e42 #2d2d30;
+}
+
+.message {
+    margin-bottom: 15px;
+}
+
+.message.system .message-content {
+    background-color: #2d2d30;
+    border-left: 3px solid #4ec9b0;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.message.user .message-content {
+    background-color: #094771;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.4;
+    margin-left: 20px;
+}
+
+.message.assistant .message-content {
+    background-color: #3c3c3c;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.4;
+    margin-right: 20px;
+}
+
+/* Chat Input Container */
+.chat-input-container {
+    padding: 15px;
+    border-top: 1px solid #3e3e42;
+    background-color: #2d2d30;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.chat-input {
+    flex: 1;
+    padding: 10px 12px;
+    background-color: #1e1e1e;
+    border: 1px solid #3e3e42;
+    border-radius: 4px;
+    color: #d4d4d4;
+    font-size: 14px;
+    outline: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.chat-input:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.chat-input::placeholder {
+    color: #858585;
+}
+
+.play-btn {
+    padding: 10px 16px;
+    background-color: #0e639c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.play-btn:hover {
+    background-color: #1177bb;
+}
+
+.play-btn .play-icon {
+    color: #4caf50;
+    font-size: 16px;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.loading-overlay.show {
+    display: flex;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #3e3e42;
+    border-top: 4px solid #0e639c;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+.loading-text {
+    color: #d4d4d4;
+    font-size: 16px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #2d2d30;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3e3e42;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #4c4c4c;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .left-panel {
+        width: 200px;
+    }
+    
+    .right-panel {
+        width: 250px;
+    }
+}
+
+@media (max-width: 900px) {
+    .main-content {
+        flex-direction: column;
+    }
+    
+    .left-panel,
+    .right-panel {
+        width: 100%;
+        height: 150px;
+    }
+}
