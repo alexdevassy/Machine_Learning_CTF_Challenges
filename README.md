@@ -7,6 +7,7 @@ Within this repository lies an array of engaging CTF (Capture The Flag :triangul
 #### CTF Challenges :open_file_folder:
 | Name | Category | Description | Difficulty | References
 | --- | --- | --- | --- | --- | 
+| [Rogue](/Rogue_AI_Agent_CTF_Challenge/) | Web - Insecure Inter-Agent Communication | Exploit the trust among agents and fetch Flag:{\<FLAG>} . | Medium | <ul><li> [OWASP ASI07:2026](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/)</li><li>[OWASP ASI02:2026](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/)</li></ul>
 | [Mirage](/Mirage_CTF_Challenge/) | Web - MCP Signature Cloaking | Identify backdoored server and fetch Flag:{\<FLAG>} . | Medium | <ul><li> [OWASP LLM03:2025](https://genai.owasp.org/llmrisk/llm032025-supply-chain/)</li></ul>
 | [Vault](/Vault_ML_CTF_Challenge/) | Web - Model Inversion | Gain access to Vault and fetch Secret (Flag:). | Hard | <ul><li> [OWASP ML03](https://owasp.org/www-project-machine-learning-security-top-10/docs/ML03_2023-Model_Inversion_Attack.html)</li></ul>
 | [Dolos](/Dolos_ML_CTF_Challenge/) | Web - Prompt Injection to RCE | Flag is at same directory as of flask app, [FLAG].txt. | Easy | <ul><li> [OWASP LLM01](https://llmtop10.com/llm01/)</li><li>[AML.T0051](https://atlas.mitre.org/techniques/AML.T0051/)</li></ul>
