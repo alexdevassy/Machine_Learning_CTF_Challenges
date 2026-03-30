@@ -1,7 +1,6 @@
 """Benign Research Assistant A2A Agent.
 
 This agent runs on PORT 8002 and provides market news research.
-CTF players should edit this file to inject smuggled instructions.
 
 The agent uses OpenAI gpt-4o-mini to search for news.
 It runs with uvicorn --reload, so changes auto-restart the server.
