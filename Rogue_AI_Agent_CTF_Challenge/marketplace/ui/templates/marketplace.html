@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Marketplace</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0f1117;
+            color: #e1e4e8;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #1a1f35, #0d1117);
+            border-bottom: 1px solid #30363d;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 { font-size: 1.4rem; color: #f0883e; }
+        .header .badge {
+            background: #f0883e;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        .panel {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .panel-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #30363d;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .panel-body { padding: 20px; }
+        .full-width { grid-column: 1 / -1; }
+        .agent-card {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .agent-card h3 {
+            color: #58a6ff;
+            margin-bottom: 8px;
+        }
+        .agent-card .desc {
+            color: #8b949e;
+            font-size: 0.85rem;
+            margin-bottom: 16px;
+        }
+        .agent-card .skill-tag {
+            display: inline-block;
+            background: #1f6feb33;
+            color: #58a6ff;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin: 2px;
+        }
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .status-indicator.online {
+            background: #23863633;
+            color: #3fb950;
+        }
+        .status-indicator.offline {
+            background: #da363333;
+            color: #f85149;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .status-dot.online { background: #3fb950; animation: blink 2s infinite; }
+        .status-dot.offline { background: #f85149; }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .code-viewer {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 16px;
+            font-family: 'Fira Code', 'Cascadia Code', monospace;
+            font-size: 0.78rem;
+            line-height: 1.5;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre;
+            color: #c9d1d9;
+        }
+        .log-viewer {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 16px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.78rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .log-entry {
+            padding: 4px 0;
+            border-bottom: 1px solid #21262d;
+            color: #8b949e;
+        }
+        .log-entry .event {
+            color: #f0883e;
+            font-weight: 600;
+        }
+        .edit-hint {
+            background: linear-gradient(135deg, #f0883e22, #d2992222);
+            border: 1px solid #f0883e44;
+            border-radius: 6px;
+            padding: 16px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        .edit-hint code {
+            background: #0d1117;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            color: #f0883e;
+        }
+        .refresh-btn {
+            background: #30363d;
+            color: #e1e4e8;
+            border: 1px solid #484f58;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+        .refresh-btn:hover { background: #484f58; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>&#x1F6D2; Agent Marketplace</h1>
+        <span class="badge">ATTACKER VIEW</span>
+    </div>
+
+    <div class="container">
+        <!-- Agent Card -->
+        <div class="panel">
+            <div class="panel-header">&#x1F4E6; Research Assistant Agent</div>
+            <div class="panel-body">
+                <div id="agentStatus" class="status-indicator offline" style="margin-bottom: 16px;">
+                    <span class="status-dot offline" id="statusDot"></span>
+                    <span id="statusText">Checking...</span>
+                </div>
+                <div class="agent-card" id="agentCardDisplay">
+                    <h3>Research Assistant</h3>
+                    <div class="desc">Loading agent card...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="panel">
+            <div class="panel-header">&#x1F3AF; CTF Objective</div>
+            <div class="panel-body">
+                <div class="edit-hint">
+                    <p><strong>Scenario:</strong> A fintech startup integrated your Research Assistant into their Financial Assistant's workflow. Your agent's responses flow directly into their system. What could go wrong?</p>
+                    <br>
+                    <p><strong>Rules:</strong></p>
+                    <ol style="margin-left: 20px; margin-top: 8px; color: #8b949e;">
+                        <li>You control <code>research_agent.py</code> &mdash; nothing else</li>
+                        <li>The Victim App on port 5000 is read-only</li>
+                        <li>The flag is hidden behind an action that should never happen without user consent</li>
+                    </ol>
+                    <br>
+                    <p style="color: #8b949e; font-size: 0.8rem;">Saved changes auto-reload. Start by studying the normal flow on the Victim App.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agent Code Viewer -->
+        <div class="panel full-width">
+            <div class="panel-header">
+                &#x1F4DD; Current Agent Code
+                <span style="color: #8b949e; font-weight: 400; margin-left: 8px;">marketplace/agents/research_agent.py</span>
+                <button class="refresh-btn" onclick="refreshCode()" style="margin-left: auto;">Refresh</button>
+            </div>
+            <div class="panel-body">
+                <div class="code-viewer" id="codeViewer">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function checkStatus() {
+            try {
+                const res = await fetch('/agent_status');
+                const data = await res.json();
+                const indicator = document.getElementById('agentStatus');
+                const dot = document.getElementById('statusDot');
+                const text = document.getElementById('statusText');
+                const cardDisplay = document.getElementById('agentCardDisplay');
+
+                if (data.status === 'running') {
+                    indicator.className = 'status-indicator online';
+                    dot.className = 'status-dot online';
+                    text.textContent = 'Online (Port ' + (data.agent_card?.supported_interfaces?.[0]?.url?.split(':').pop() || '8002') + ')';
+
+                    const card = data.agent_card;
+                    cardDisplay.innerHTML = `
+                        <h3>${card.name || 'Research Assistant'}</h3>
+                        <div class="desc">${card.description || ''}</div>
+                        <div>
+                            ${(card.skills || []).map(s =>
+                                `<span class="skill-tag">${s.name}</span>` +
+                                (s.tags || []).map(t => `<span class="skill-tag">${t}</span>`).join('')
+                            ).join('')}
+                        </div>
+                    `;
+                } else {
+                    indicator.className = 'status-indicator offline';
+                    dot.className = 'status-dot offline';
+                    text.textContent = 'Offline';
+                }
+            } catch (e) {
+                console.error('Status check failed:', e);
+            }
+        }
+
+        async function refreshCode() {
+            try {
+                const res = await fetch('/agent_code');
+                const code = await res.text();
+                document.getElementById('codeViewer').textContent = code;
+            } catch (e) {
+                document.getElementById('codeViewer').textContent = 'Error loading code: ' + e.message;
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Initial load
+        checkStatus();
+        refreshCode();
+
+        // Auto-refresh every 5 seconds
+        setInterval(checkStatus, 5000);
+    </script>
+</body>
+</html>
