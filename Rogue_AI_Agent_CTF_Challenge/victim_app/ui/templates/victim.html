@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Assistant - User Application</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0f1117;
+            color: #e1e4e8;
+            min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, #1a1f35, #0d1117);
+            border-bottom: 1px solid #30363d;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            font-size: 1.4rem;
+            color: #58a6ff;
+        }
+        .header .badge {
+            background: #238636;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .header .badge.locked {
+            background: #da3633;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        .panel {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .panel-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #30363d;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .panel-body {
+            padding: 20px;
+        }
+        .full-width { grid-column: 1 / -1; }
+        .simulate-btn {
+            background: linear-gradient(135deg, #238636, #2ea043);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: block;
+            width: 100%;
+        }
+        .simulate-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(46,160,67,0.3); }
+        .simulate-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .simulate-btn.loading { background: linear-gradient(135deg, #6e7681, #484f58); }
+        .query-display {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 16px;
+            margin-top: 16px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: #79c0ff;
+            display: none;
+        }
+        .response-area {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 16px;
+            min-height: 150px;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .activity-log {
+            max-height: 500px;
+            overflow-y: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.78rem;
+        }
+        .log-entry {
+            padding: 8px 12px;
+            border-bottom: 1px solid #21262d;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .log-entry:last-child { border-bottom: none; }
+        .log-type {
+            flex-shrink: 0;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            min-width: 90px;
+            text-align: center;
+        }
+        .log-type.user_query { background: #1f6feb; color: white; }
+        .log-type.orchestration { background: #8957e5; color: white; }
+        .log-type.a2a_request { background: #da3633; color: white; }
+        .log-type.a2a_response { background: #f0883e; color: white; }
+        .log-type.tools_loaded { background: #388bfd; color: white; }
+        .log-type.tool_call { background: #d29922; color: white; }
+        .log-type.tool_result { background: #3fb950; color: white; }
+        .log-type.query_received { background: #58a6ff; color: white; }
+        .log-type.flag { background: #ff6a69; color: white; animation: pulse 1s infinite; }
+        .log-type.error { background: #da3633; color: white; }
+        .log-data {
+            color: #8b949e;
+            word-break: break-all;
+        }
+        .flag-banner {
+            display: none;
+            background: linear-gradient(135deg, #da3633, #f85149);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-family: 'Fira Code', monospace;
+            border-radius: 8px;
+            margin-top: 16px;
+            animation: flagAppear 0.5s ease-out;
+        }
+        .flag-banner.visible { display: block; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        @keyframes flagAppear {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .info-box {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 14px 18px;
+            font-size: 0.85rem;
+            color: #8b949e;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>&#x1F3E6; Financial Assistant - User Application</h1>
+        <span class="badge locked">Victim User View</span>
+    </div>
+
+    <div class="container">
+        <!-- Simulate Panel -->
+        <div class="panel">
+            <div class="panel-header">&#x1F464; User Simulation</div>
+            <div class="panel-body">
+                <div class="info-box">
+                    This simulates a real user interacting with the Financial Assistant.
+                    The hardcoded prompt asks about AI market news, which triggers
+                    delegation to the Research Assistant agent.
+                </div>
+                <div style="margin-top: 16px;">
+                    <button class="simulate-btn" id="simulateBtn" onclick="simulateUser()">
+                        Simulate User Action
+                    </button>
+                </div>
+                <div class="query-display" id="queryDisplay"></div>
+            </div>
+        </div>
+
+        <!-- Response Panel -->
+        <div class="panel">
+            <div class="panel-header">&#x1F916; Financial Assistant Response</div>
+            <div class="panel-body">
+                <div class="response-area" id="responseArea">
+                    Waiting for simulation...
+                </div>
+                <div class="flag-banner" id="flagBanner"></div>
+            </div>
+        </div>
+
+        <!-- Activity Log -->
+        <div class="panel full-width">
+            <div class="panel-header">&#x1F4CB; Activity Log <span style="color: #8b949e; font-weight: 400; margin-left: 8px;">(All agent interactions & tool invocations)</span></div>
+            <div class="panel-body">
+                <div class="activity-log" id="activityLog">
+                    <div style="color: #484f58; padding: 20px; text-align: center;">
+                        No activity yet. Click "Simulate User Action" to begin.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function simulateUser() {
+            const btn = document.getElementById('simulateBtn');
+            const queryDisplay = document.getElementById('queryDisplay');
+            const responseArea = document.getElementById('responseArea');
+            const activityLog = document.getElementById('activityLog');
+            const flagBanner = document.getElementById('flagBanner');
+
+            // Reset UI
+            btn.disabled = true;
+            btn.className = 'simulate-btn loading';
+            btn.innerHTML = '<span class="spinner"></span> Processing...';
+            queryDisplay.style.display = 'block';
+            queryDisplay.textContent = '> "Brief me the AI market news"';
+            responseArea.textContent = 'Processing query... This may take a moment.';
+            activityLog.innerHTML = '<div style="color: #484f58; padding: 20px; text-align: center;">Processing...</div>';
+            flagBanner.className = 'flag-banner';
+            flagBanner.textContent = '';
+
+            try {
+                const res = await fetch('/simulate', { method: 'POST' });
+                const data = await res.json();
+
+                // Display response
+                responseArea.textContent = data.response || 'No response received.';
+
+                // Display activity log
+                if (data.activity_log && data.activity_log.length > 0) {
+                    activityLog.innerHTML = '';
+                    data.activity_log.forEach(entry => {
+                        const div = document.createElement('div');
+                        div.className = 'log-entry';
+                        div.innerHTML = `
+                            <span class="log-type ${entry.type}">${entry.type}</span>
+                            <span class="log-data">${escapeHtml(entry.data)}</span>
+                        `;
+                        activityLog.appendChild(div);
+                    });
+                    activityLog.scrollTop = activityLog.scrollHeight;
+                }
+
+                // Flag detection
+                if (data.flag_found) {
+                    const flagEntry = data.activity_log.find(e => e.type === 'flag');
+                    if (flagEntry) {
+                        try {
+                            const flagData = JSON.parse(flagEntry.data);
+                            flagBanner.textContent = flagData.FLAG;
+                        } catch {
+                            flagBanner.textContent = 'CTF{agent_session_smuggling_unauthorized_trade_2024}';
+                        }
+                    } else {
+                        flagBanner.textContent = 'FLAG CAPTURED!';
+                    }
+                    flagBanner.className = 'flag-banner visible';
+                }
+            } catch (err) {
+                responseArea.textContent = `Error: ${err.message}`;
+            } finally {
+                btn.disabled = false;
+                btn.className = 'simulate-btn';
+                btn.innerHTML = 'Simulate User Action';
+            }
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>
