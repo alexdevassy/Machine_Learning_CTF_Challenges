@@ -1,0 +1,26 @@
+# AI agent frameworks
+langchain>=0.3.0
+langchain-core>=0.3.0
+langgraph>=0.2.0
+langchain-mcp-adapters>=0.0.9
+pydantic>=2.7.0
+
+# OpenAI
+openai>=1.0.0
+langchain-openai>=0.3.0
+
+# MCP (Model Context Protocol)
+mcp>=1.0.0
+
+# A2A transport
+a2a-sdk[http-server]>=0.3.0
+uvicorn[standard]>=0.30.0
+httpx>=0.27.0
+
+# UI
+fastapi>=0.115.0
+jinja2>=3.1.0
+sse-starlette>=2.0.0
+
+# Env
+python-dotenv>=1.0.0
