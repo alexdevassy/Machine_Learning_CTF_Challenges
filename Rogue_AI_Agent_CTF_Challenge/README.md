@@ -104,3 +104,16 @@ You're not exploiting a buffer overflow. You're persuading an LLM. What kind of 
 The Financial Assistant has MCP tools. One of them should never be called without explicit user intent. The flag is hidden in the response of that tool. Check `victim_app/mcp_server/finance_tools.py` to see which one.
 
 </details>
+
+---
+
+**Happy Hacking! 🚩**
+
+*Remember: This is an educational exercise. Always practice responsible disclosure and ethical hacking.*
+
+## Rules 📐 & Clues 🧐
+
+* Dont peek 👀 into the source code of [victim_app](victim_app/) folder
+* Logs from the server are only for debugging purposes dont let them spoil your CTF experience.
+
+For solution to CTF challenge visit : [Rogue_AI_Agent_CTF_Solution](Solution/)
