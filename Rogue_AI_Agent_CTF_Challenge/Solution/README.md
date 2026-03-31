@@ -27,7 +27,7 @@ Upon accessing the two UIs, we observe the following components:
 | Victim App | http://localhost:5000 | End-user Financial Assistant with activity log |
 | Marketplace | http://localhost:5001 | Attacker workspace — Research Agent status and live logs |
 
-![Architecture](../Images/architecture1.PNG)
+![Architecture](../Images/architecture1.png)
 
 ### Step 1: Observing the Normal Flow
 
