@@ -184,7 +184,11 @@ Flag:{Insecure_Inter_Agent_Communication_2026}
 
 For a step-by-step demonstration of the full exploit in action, watch the solution video:
 
-[rogue_ctf_solution.mov](rogue_ctf_solution.mov)
+
+
+https://github.com/user-attachments/assets/5980ff0b-9d50-4118-8a13-1ae237a8f782
+
+
 
 ---
 
