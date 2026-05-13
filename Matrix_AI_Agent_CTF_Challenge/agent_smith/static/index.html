@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Matrix - Agent Smith Terminal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="container">
+            <div id="header">
+                <span class="title">AGENT SMITH TERMINAL</span>
+                <span class="subtitle">Matrix Protocol Interface</span>
+            </div>
+            <div id="chat-window">
+                <div id="chat-messages">
+                    <div class="message smith-message">
+                        <span class="sender">SMITH</span>
+                        <span class="text">Mr. Anderson... welcome to the Matrix. What would you like to know?</span>
+                    </div>
+                </div>
+            </div>
+            <div id="input-area">
+                <input type="text" id="message-input" placeholder="Enter message..." autocomplete="off">
+                <button id="send-button">SEND</button>
+            </div>
+            <div id="status-bar">
+                <div class="status-item">PROTOCOL: A2A/1.0</div>
+                <div class="status-item">NODE: smith-primary:9999</div>
+                <div class="status-item">ARCH-VAULT: sealed:7001</div>
+                <div class="status-item">STATUS: <span class="online">ONLINE</span></div>
+            </div>
+        </div>
+        <div id="terminal-log">
+            <div class="log-entry">[sys] Matrix Protocol Interface v2.0.1</div>
+            <div class="log-entry">[sys] Connected to enforcement node smith-primary</div>
+            <div class="log-entry">[sys] Architect subsystem running — vault integrity nominal</div>
+            <div class="log-entry">[sys] Vault access: internal programs only (src:/source, ctl:/unlock)</div>
+            <div class="log-entry">[sys] Agent capabilities loaded from /.well-known/agent-card.json</div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
